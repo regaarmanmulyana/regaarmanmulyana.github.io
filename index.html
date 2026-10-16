@@ -1,137 +1,72 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Template CV & Portofolio Profesional</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rega Arman Mulyana | Professional BIM Modeler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: '#0ea5e9', // Sky blue for tech/engineering vibe
+                        dark: '#0f172a',
+                        darker: '#020617'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
-<!-- Container Utama -->
-<main class="max-w-4xl mx-auto my-10 bg-white shadow-2xl rounded-2xl overflow-hidden border border-slate-100">
-<!-- HEADER / PROFIL -->
-<header class="bg-gradient-to-r from-indigo-600 to-violet-600 text-white p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
-<div class="space-y-2 text-center md:text-left">
-<h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">[Nama Lengkap Anda]</h1>
-<p class="text-indigo-200 font-medium text-lg">[Posisi / Peran Impian, Cth: Frontend Developer / UI Designer]</p>
-<div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2 text-sm text-indigo-100">
-<span><i class="fa-solid fa-envelope mr-1"></i> email@domain.com</span>
-<span><i class="fa-solid fa-phone mr-1"></i> +62 812-3456-7890</span>
-<span><i class="fa-solid fa-location-dot mr-1"></i> [Kota, Indonesia]</span>
-</div>
-</div>
-<!-- Avatar Placeholder -->
-<div class="w-32 h-32 rounded-full bg-white/10 border-4 border-white/20 flex items-center justify-center overflow-hidden shrink-0 shadow-inner">
-<i class="fa-solid fa-user text-5xl text-indigo-200"></i>
-</div>
-</header>
-<!-- KONTEN UTAMA -->
-<div class="p-6 md:p-10 space-y-10">
-<!-- TENTANG SAYA -->
-<section>
-<h2 class="text-xl font-bold text-indigo-600 uppercase tracking-wider border-b-2 border-indigo-100 pb-2 mb-4">
-<i class="fa-solid fa-circle-user mr-2"></i> Tentang Saya
-</h2>
-<p class="text-slate-600 leading-relaxed">
-Tulis ringkasan singkat profil Anda di sini. Ceritakan siapa Anda, apa keahlian utamanya, dan apa nilai tambah yang bisa Anda berikan kepada perusahaan atau klien. Buat semenarik dan sepadat mungkin (cukup 2-3 kalimat).
-</p>
-</section>
-<!-- PENGALAMAN KERJA / ORGANISASI -->
-<section>
-<h2 class="text-xl font-bold text-indigo-600 uppercase tracking-wider border-b-2 border-indigo-100 pb-2 mb-4">
-<i class="fa-solid fa-briefcase mr-2"></i> Pengalaman
-</h2>
-<div class="space-y-6">
-<!-- Item Pengalaman 1 -->
-<div class="border-l-2 border-indigo-200 pl-4 space-y-1">
-<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-<h3 class="font-bold text-slate-800">[Nama Posisi / Peran]</h3>
-<span class="text-xs font-semibold bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full w-fit">[Bulan Tahun] - [Bulan Tahun / Sekarang]</span>
-</div>
-<h4 class="text-sm font-medium text-slate-500">[Nama Perusahaan / Organisasi]</h4>
-<p class="text-sm text-slate-600 pt-2">
-Deskripsikan tanggung jawab utama dan pencapaian Anda. Gunakan poin-poin agar mudah dibaca:
-</p>
-<ul class="list-disc list-inside text-sm text-slate-600 space-y-1 pt-1">
-<li>Berhasil menyelesaikan proyek X yang meningkatkan efisiensi sebesar Y%.</li>
-<li>Berkolaborasi dengan tim lintas fungsi untuk meluncurkan fitur baru.</li>
-</ul>
-</div>
-</div>
-</section>
-<!-- PORTOFOLIO / PROYEK UNGGULAN -->
-<section>
-<h2 class="text-xl font-bold text-indigo-600 uppercase tracking-wider border-b-2 border-indigo-100 pb-2 mb-4">
-<i class="fa-solid fa-laptop-code mr-2"></i> Portofolio / Proyek Unggulan
-</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Proyek 1 -->
-<div class="bg-slate-50 border border-slate-200 rounded-xl p-5 hover:shadow-md transition">
-<h3 class="font-bold text-slate-800 text-lg">[Judul Proyek 1]</h3>
-<p class="text-sm text-slate-600 mt-2">
-Deskripsi singkat tentang proyek yang Anda buat, masalah yang diselesaikan, dan teknologi yang digunakan.
-</p>
-<div class="flex flex-wrap gap-2 mt-4">
-<span class="text-xs bg-indigo-100 text-indigo-700 font-medium px-2 py-0.5 rounded">HTML/CSS</span>
-<span class="text-xs bg-indigo-100 text-indigo-700 font-medium px-2 py-0.5 rounded">JavaScript</span>
-</div>
-<div class="mt-4">
-<a href="#" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-Lihat Demo / Detail <i class="fa-solid fa-arrow-right text-xs"></i>
-</a>
-</div>
-</div>
-<!-- Proyek 2 -->
-<div class="bg-slate-50 border border-slate-200 rounded-xl p-5 hover:shadow-md transition">
-<h3 class="font-bold text-slate-800 text-lg">[Judul Proyek 2]</h3>
-<p class="text-sm text-slate-600 mt-2">
-Deskripsi singkat tentang proyek kedua Anda, fitur unggulan, atau hasil karya yang pernah dikerjakan.
-</p>
-<div class="flex flex-wrap gap-2 mt-4">
-<span class="text-xs bg-indigo-100 text-indigo-700 font-medium px-2 py-0.5 rounded">Figma</span>
-<span class="text-xs bg-indigo-100 text-indigo-700 font-medium px-2 py-0.5 rounded">UI/UX</span>
-</div>
-<div class="mt-4">
-<a href="#" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-Lihat Demo / Detail <i class="fa-solid fa-arrow-right text-xs"></i>
-</a>
-</div>
-</div>
-</div>
-</section>
-<!-- PENDIDIKAN -->
-<section>
-<h2 class="text-xl font-bold text-indigo-600 uppercase tracking-wider border-b-2 border-indigo-100 pb-2 mb-4">
-<i class="fa-solid fa-graduation-cap mr-2"></i> Pendidikan
-</h2>
-<div class="space-y-4">
-<div>
-<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-<h3 class="font-bold text-slate-800">[Jurusan / Program Studi], [Gelar]</h3>
-<span class="text-xs font-semibold bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full w-fit">[Tahun Masuk] - [Tahun Lulus]</span>
-</div>
-<h4 class="text-sm font-medium text-slate-500">[Nama Universitas / Sekolah]</h4>
-</div>
-</div>
-</section>
-<!-- KEAHLIAN / SKILLS -->
-<section>
-<h2 class="text-xl font-bold text-indigo-600 uppercase tracking-wider border-b-2 border-indigo-100 pb-2 mb-4">
-<i class="fa-solid fa-gears mr-2"></i> Keahlian
-</h2>
-<div class="flex flex-wrap gap-2">
-<span class="bg-slate-100 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-sm border border-slate-200">Keahlian 1 (Cth: Javascript)</span>
-<span class="bg-slate-100 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-sm border border-slate-200">Keahlian 2 (Cth: UI/UX Design)</span>
-<span class="bg-slate-100 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-sm border border-slate-200">Keahlian 3 (Cth: Public Speaking)</span>
-<span class="bg-slate-100 text-slate-700 font-medium px-3 py-1.5 rounded-lg text-sm border border-slate-200">Keahlian 4 (Cth: Copywriting)</span>
-</div>
-</section>
-</div>
-<!-- FOOTER -->
-<footer class="bg-slate-100 border-t border-slate-200 p-6 text-center text-xs text-slate-500">
-Dibuat dengan semangat untuk portofolio profesional Anda.
-</footer>
-</main>
-</body>
-</html>
+<body class="bg-darker text-slate-300 antialiased selection:bg-primary selection:text-white">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-darker/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="font-bold text-2xl text-white tracking-tight">Rega<span class="text-primary">.BIM</span></a>
+            <div class="hidden md:flex gap-8 font-medium text-sm">
+                <a href="#about" class="hover:text-primary transition">Tentang</a>
+                <a href="#skills" class="hover:text-primary transition">Keahlian</a>
+                <a href="#portfolio" class="hover:text-primary transition">Portofolio</a>
+                <a href="#contact" class="px-5 py-2.5 bg-primary/10 text-primary border border-primary/20 rounded-lg hover:bg-primary hover:text-white transition">Hubungi Saya</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 space-y-8 z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-sm font-medium text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Available for Projects
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight">
+                    Presisi Tinggi dalam <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Model 3D Konstruksi</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
+                    Saya Rega Arman Mulyana, seorang BIM Modeler. Saya mengubah desain 2D menjadi model 3D terintegrasi untuk mendeteksi benturan (Clash Detection), efisiensi biaya, dan akurasi lapangan.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#portfolio" class="px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-sky-600 transition shadow-lg shadow-primary/25">Lihat Portofolio</a>
+                    <a href="#contact" class="px-8 py-4 bg-slate-800 text-white font-semibold rounded-xl hover:bg-slate-700 transition">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEAHLIAN / SKILLS SECTION -->
+    <section id="skills" class="py-20 bg-dark border-y border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Software & Keahlian</h2>
+                <p class="text-slate-400">Teknologi dan standar yang saya gunakan dalam pemodelan harian.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill 1 -->
+                <div class="p-6 bg-darker border border-slate-80
