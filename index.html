@@ -18,11 +18,11 @@
             }
         }
     </script>
-    <!-- Alpine.js untuk Interaktivitas -->
+    <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -34,24 +34,20 @@
     <!-- NAVBAR -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Logo -->
             <a href="#" class="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
                 MyPorto.
             </a>
 
-            <!-- Nav Desktop -->
             <nav class="hidden md:flex items-center space-x-8 font-medium text-sm">
                 <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Tentang</a>
                 <a href="#services" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Layanan</a>
                 <a href="#resume" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">CV & Pengalaman</a>
                 <a href="#portfolio" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Portofolio</a>
-                <a href="#testimonials" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Testimoni</a>
+                <a href="#methodology" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Pendekatan BIM</a>
                 <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Kontak</a>
             </nav>
 
-            <!-- Aksi Kanan: Dark Mode & Menu Mobile Toggle -->
             <div class="flex items-center space-x-4">
-                <!-- Tombol Dark Mode -->
                 <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
                         class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:scale-105 transition shadow-sm"
                         aria-label="Toggle Dark Mode">
@@ -59,12 +55,10 @@
                     <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
                 </button>
 
-                <!-- Tombol Download CV Cepat -->
                 <a href="#resume" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/25 hover:opacity-95 transition">
                     <i class="fa-solid fa-download"></i> CV Saya
                 </a>
 
-                <!-- Hamburger Menu Mobile -->
                 <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
                     <i class="fa-solid fa-bars text-xl" x-show="!mobileMenu"></i>
                     <i class="fa-solid fa-xmark text-xl" x-show="mobileMenu" x-cloak></i>
@@ -72,13 +66,13 @@
             </div>
         </div>
 
-        <!-- Menu Mobile Dropdown -->
+        <!-- Menu Mobile -->
         <div class="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3" x-show="mobileMenu" x-cloak x-transition>
             <a href="#about" @click="mobileMenu = false" class="block py-2 font-medium">Tentang</a>
             <a href="#services" @click="mobileMenu = false" class="block py-2 font-medium">Layanan</a>
             <a href="#resume" @click="mobileMenu = false" class="block py-2 font-medium">CV & Pengalaman</a>
             <a href="#portfolio" @click="mobileMenu = false" class="block py-2 font-medium">Portofolio</a>
-            <a href="#testimonials" @click="mobileMenu = false" class="block py-2 font-medium">Testimoni</a>
+            <a href="#methodology" @click="mobileMenu = false" class="block py-2 font-medium">Pendekatan BIM</a>
             <a href="#contact" @click="mobileMenu = false" class="block py-2 font-medium">Kontak</a>
             <a href="#resume" @click="mobileMenu = false" class="w-full text-center block bg-indigo-600 text-white py-2.5 rounded-xl font-semibold shadow">Download CV</a>
         </div>
@@ -88,7 +82,6 @@
     <section class="relative overflow-hidden py-20 lg:py-32">
         <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100 via-transparent to-transparent dark:from-indigo-950/30 dark:to-transparent"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
-            <!-- Teks Hero -->
             <div class="flex-1 text-center lg:text-left space-y-6">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
                     <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Available For Career Discussions 
@@ -98,7 +91,7 @@
                 </h1>
                 <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Seorang <strong class="text-slate-800 dark:text-slate-200">BIM Modeler</strong> bermotivasi tinggi dengan rekam jejak pada integrasi pemodelan Arsitektur, Struktur, dan MEP.
-                <!-- Tombol CTA -->
+                </p>
                 <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
                     <a href="#portfolio" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-indigo-500/30 transition flex items-center gap-2">
                         Lihat Portofolio <i class="fa-solid fa-arrow-right text-sm"></i>
@@ -107,7 +100,6 @@
                         Hubungi Saya
                     </a>
                 </div>
-                <!-- Statistik Mini -->
                 <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-slate-800 text-center lg:text-left">
                     <div>
                         <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">1.5+</div>
@@ -124,12 +116,10 @@
                 </div>
             </div>
 
-            <!-- Avatar / Foto Hero -->
             <div class="relative flex justify-center">
                 <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden bg-gradient-to-tr from-indigo-500 to-violet-500 p-1.5 shadow-2xl shadow-indigo-500/20">
                     <img src="file_000000003f8882078fb5f022965e29af.png" alt="Rega Arman Mulyana" class="w-full h-full object-cover rounded-[22px]">
-
-                <!-- Floating Badge -->
+                </div>
                 <div class="absolute -bottom-4 -left-4 sm:left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -165,57 +155,56 @@
                     <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
                         Saya terbiasa merancang dan mengelola model 3D dengan tingkat detail (LOD) 200 hingga 350. Tujuan utama saya dalam setiap proyek adalah menerjemahkan desain menjadi model digital yang sangat akurat, memastikan kelancaran koordinasi antar-disiplin, dan mencegah clash (benturan) sebelum tahap pelaksanaan di lapangan.
                     </p>
-                    <!-- Detail Informasi Pribadi -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-sm">
-                        <div><strong class="text-slate-800 dark:text-slate-200">Nama:</strong> Rega Arman Mulayana</div>
+                        <div><strong class="text-slate-800 dark:text-slate-200">Nama:</strong> Rega Arman Mulyana</div>
                         <div><strong class="text-slate-800 dark:text-slate-200">Email:</strong> regaarmanmulyana@gmail.com</div>
                         <div><strong class="text-slate-800 dark:text-slate-200">Lokasi:</strong> Bandung, Indonesia</div>
-                        <div><strong class="text-slate-800 dark:text-slate-200">Freelance:</strong> Available for Career Discussions </div>
+                        <div><strong class="text-slate-800 dark:text-slate-200">Status:</strong> Available for Career Discussions</div>
                     </div>
                 </div>
 
-                <!-- Keahlian Utama (Progress Bar / Badge) -->
+                <!-- Keahlian Utama (Daftar Software) -->
                 <div class="bg-slate-50 dark:bg-slate-800/50 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700/50 space-y-6">
-                    <h4 class="font-bold text-lg mb-4">Modeler & Drafter</h4>
+                    <h4 class="font-bold text-lg mb-4">Perangkat Lunak Utama</h4>
                     
                     <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between text-sm font-semibold mb-1">
-                                <span>Frontend (HTML/CSS, Tailwind, React, Vue)</span>
-                                <span class="text-indigo-600 dark:text-indigo-400">95%</span>
+                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                                <i class="fa-solid fa-cube text-lg"></i>
                             </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-indigo-600 h-full rounded-full" style="width: 95%"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between text-sm font-semibold mb-1">
-                                <span>Backend (Node.js, Express, PHP/Laravel)</span>
-                                <span class="text-indigo-600 dark:text-indigo-400">85%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-indigo-600 h-full rounded-full" style="width: 85%"></div>
+                            <div>
+                                <div class="font-semibold text-slate-800 dark:text-slate-200">Autodesk Revit</div>
+                                <div class="text-xs text-slate-500">Pemodelan 3D & Koordinasi BIM</div>
                             </div>
                         </div>
 
-                        <div>
-                            <div class="flex justify-between text-sm font-semibold mb-1">
-                                <span>BIM MODELER</span>
-                                <span class="text-indigo-600 dark:text-indigo-400">90%</span>
+                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                                <i class="fa-solid fa-network-wired text-lg"></i>
                             </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-indigo-600 h-full rounded-full" style="width: 90%"></div>
+                            <div>
+                                <div class="font-semibold text-slate-800 dark:text-slate-200">Navisworks</div>
+                                <div class="text-xs text-slate-500">Clash Detection & Simulasi</div>
                             </div>
                         </div>
 
-                        <div>
-                            <div class="flex justify-between text-sm font-semibold mb-1">
-                                <span>Database & DevOps (MySQL, MongoDB, Git)</span>
-                                <span class="text-indigo-600 dark:text-indigo-400">80%</span>
+                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                                <i class="fa-solid fa-compass-drafting text-lg"></i>
                             </div>
-                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-indigo-600 h-full rounded-full" style="width: 80%"></div>
+                            <div>
+                                <div class="font-semibold text-slate-800 dark:text-slate-200">AutoCAD</div>
+                                <div class="text-xs text-slate-500">Drafting & Dokumentasi 2D</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                                <i class="fa-solid fa-table-list text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-slate-800 dark:text-slate-200">Spreadsheets</div>
+                                <div class="text-xs text-slate-500">Manajemen Data & Kuantitas</div>
                             </div>
                         </div>
                     </div>
@@ -224,427 +213,46 @@
         </div>
     </section>
 
-    <!-- LAYANAN KAMI -->
-    <section id="services" class="py-20">
+    <!-- FOKUS & METODOLOGI KERJA -->
+    <section id="methodology" class="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Apa yang Saya Tawarkan</h2>
-                <h3 class="text-3xl font-bold tracking-tight">Layanan Profesional</h3>
-                <p class="text-slate-600 dark:text-slate-400">Membantu bisnis dan personal mengubah ide menjadi produk digital bernilai tinggi.</p>
+                <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Pendekatan Kerja</h2>
+                <h3 class="text-3xl font-bold tracking-tight">Fokus & Metodologi BIM</h3>
+                <p class="text-slate-600 dark:text-slate-400">Bagaimana saya memastikan kualitas dan akurasi dalam setiap model yang dibangun.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Layanan 1 -->
-                <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition group">
-                    <div class="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-laptop-code"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Web Development</h4>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-3xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
+                    <h4 class="text-xl font-bold mb-3">Koordinasi Antar-Disiplin</h4>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Membangun website responsif, cepat, dan SEO-friendly menggunakan teknologi modern seperti React, Tailwind CSS, dan Node.js.
+                        Fokus utama pada deteksi benturan (clash detection) sejak fase awal desain untuk mencegah pekerjaan ulang yang mahal di lapangan, memastikan keselarasan antara Arsitektur, Struktur, dan MEP.
                     </p>
                 </div>
 
-                <!-- Layanan 2 -->
-                <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition group">
-                    <div class="w-14 h-14 rounded-2xl bg-violet-50 dark:bg-violet-950 text-violet-600 dark:text-violet-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-pen-nib"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">UI/UX Design</h4>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-3xl mb-4"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <h4 class="text-xl font-bold mb-3">Akurasi & Detail (LOD)</h4>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Merancang antarmuka pengguna yang memukau dan pengalaman interaksi yang mulus (user-centered) menggunakan Figma.
+                        Menerapkan Level of Development (LOD) yang tepat, mulai dari LOD 200 hingga 350, memastikan model tidak hanya sebagai visualisasi, tetapi juga sumber informasi yang andal untuk konstruksi.
                     </p>
                 </div>
 
-                <!-- Layanan 3 -->
-                <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition group">
-                    <div class="w-14 h-14 rounded-2xl bg-fuchsia-50 dark:bg-fuchsia-950 text-fuchsia-600 dark:text-fuchsia-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-mobile-screen"></i>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3">Mobile-First Optimization</h4>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
+                    <div class="text-indigo-600 dark:text-indigo-400 text-3xl mb-4"><i class="fa-solid fa-arrows-to-eye"></i></div>
+                    <h4 class="text-xl font-bold mb-3">Solusi Jangka Panjang</h4>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Memastikan setiap aplikasi tampil sempurna dan responsif di berbagai ukuran perangkat, mulai dari smartphone hingga desktop.
+                        Bekerja dengan cermat dan tidak terburu-buru. Setiap elemen dimodelkan dengan mempertimbangkan kemudahan perawatan (maintenance) dan operasional bangunan di masa depan.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CV & PENGALAMAN (TIMELINE) -->
-    <section id="resume" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row justify-between items-center mb-16 gap-4 text-center sm:text-left">
-                <div>
-                    <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Jejak Karier & Pendidikan</h2>
-                    <h3 class="text-3xl font-bold tracking-tight">Curriculum Vitae (CV)</h3>
-                </div>
-                <!-- Simulasi Download CV -->
-                <button onclick="alert('Simulasi: Dokumen CV PDF berhasil diunduh!')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-3 rounded-xl shadow-md transition flex items-center gap-2">
-                    <i class="fa-solid fa-file-pdf"></i> Download CV (PDF)
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Kolom Pengalaman Kerja -->
-                <div class="space-y-6">
-                    <h4 class="text-xl font-bold flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                        <i class="fa-solid fa-briefcase"></i> Pengalaman Kerja
-                    </h4>
-                    <div class="space-y-6 border-l-2 border-indigo-200 dark:border-indigo-900 pl-6 ml-3">
-                        <div class="relative">
-                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white dark:border-slate-900"></span>
-                            <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
-                                <span class="text-xs font-semibold bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2.5 py-1 rounded-full">2023 - Sekarang</span>
-                                <h5 class="font-bold text-lg">Praktik Kerja Lapangan</h5>
-                                <h6 class="text-sm text-slate-500 font-medium">PT Penta Rekayasa</h6>
-                                     Bekerja tim
-                                <p class="text-sm text-slate-600 dark:text-slate-400 pt-1">
-                                    
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white dark:border-slate-900"></span>
-                            <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
-                                <span class="text-xs font-semibold bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2.5 py-1 rounded-full">2021 - 2023</span>
-                                <h5 class="font-bold text-lg">Magang</h5>
-                                <h6 class="text-sm text-slate-500 font-medium">PT Fujicon Priangan Perdana</h6>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 pt-1">
-                                    Mengembangkan lebih dari 15 website klien dari berbagai industri menggunakan HTML, Tailwind, dan JavaScript. Berkolaborasi langsung dengan klien untuk menerjemahkan kebutuhan bisnis.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kolom Pendidikan -->
-                <div class="space-y-6">
-                    <h4 class="text-xl font-bold flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                        <i class="fa-solid fa-graduation-cap"></i> Pendidikan
-                    </h4>
-                    <div class="space-y-6 border-l-2 border-indigo-200 dark:border-indigo-900 pl-6 ml-3">
-                        <div class="relative">
-                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white dark:border-slate-900"></span>
-                            <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
-                                <span class="text-xs font-semibold bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2.5 py-1 rounded-full">2017 - 2021</span>
-                                <h5 class="font-bold text-lg">Desain Pemodelan Dan Informasi Bangunan</h5>
-                                <h6 class="text-sm text-slate-500 font-medium">Sekolah Menengah Kejuruan Pekerjaan Umum Negeri Prov.Jawa Barat</h6>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 pt-1">
-                                    Lulus dengan predikat Cum Laude. Aktif di organisasi mahasiswa bidang pengembangan teknologi dan riset antarmuka web.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <span class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white dark:border-slate-900"></span>
-                            <div class="bg-slate-50 dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
-                                <span class="text-xs font-semibold bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2.5 py-1 rounded-full">Sertifikasi Profesional</span>
-                                <h5 class="font-bold text-lg">Certified Web Developer & UI/UX</h5>
-                                <h6 class="text-sm text-slate-500 font-medium">Google & Dicoding Indonesia</h6>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 pt-1">
-                                    Menyelesaikan berbagai pelatihan intensif standar industri global untuk praktik rekayasa perangkat lunak modern.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PORTOFOLIO SHOWCASE -->
-    <section id="portfolio" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
-                <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Karya Pilihan</h2>
-                <h3 class="text-3xl font-bold tracking-tight">Portofolio Proyek</h3>
-                <p class="text-slate-600 dark:text-slate-400">Beberapa proyek terbaik yang telah saya selesaikan baru-baru ini.</p>
-            </div>
-
-            <!-- Tombol Filter Kategori -->
-            <div class="flex flex-wrap justify-center gap-2 mb-12">
-                <button @click="activeFilter = 'all'" :class="activeFilter === 'all' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'" class="px-5 py-2 rounded-xl text-sm font-semibold transition">Semua</button>
-                <button @click="activeFilter = 'web'" :class="activeFilter === 'web' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'" class="px-5 py-2 rounded-xl text-sm font-semibold transition">Web App</button>
-                <button @click="activeFilter = 'mobile'" :class="activeFilter === 'mobile' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'" class="px-5 py-2 rounded-xl text-sm font-semibold transition">Mobile App</button>
-                <button @click="activeFilter = 'uiux'" :class="activeFilter === 'uiux' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'" class="px-5 py-2 rounded-xl text-sm font-semibold transition">UI/UX Design</button>
-            </div>
-
-            <!-- Grid Proyek -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Proyek 1 -->
-                <div x-show="activeFilter === 'all' || activeFilter === 'web'" class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition flex flex-col justify-between group">
-                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=E-Commerce+Dashboard'">
-                        <div class="absolute inset-0 bg-indigo-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
-                            <button @click="modalOpen = true; modalProject = { title: 'E-Commerce Dashboard Pro', category: 'Web App', desc: 'Dashboard analitik penjualan lengkap dengan grafik interaktif real-time, manajemen stok produk, dan laporan transaksi ekspor.', tech: ['React', 'Tailwind CSS', 'Chart.js'], image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80' }" class="bg-white text-slate-900 p-3 rounded-xl font-semibold shadow-lg hover:scale-110 transition">
-                                <i class="fa-solid fa-eye"></i> Detail
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6 space-y-3">
-                        <span class="text-xs font-semibold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2.5 py-1 rounded-full"></span>
-                        <h4 class="text-xl font-bold">PLUMBING MODEL</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Nickel Mining Project Development – South East Sulawesi</p>
-                        <div class="flex flex-wrap gap-1.5 pt-2">
-                            <span class="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">React</span>
-                            <span class="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">Tailwind</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Proyek 2 -->
-                <div x-show="activeFilter === 'all' || activeFilter === 'mobile'" class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition flex flex-col justify-between group">
-                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="Finance Mobile App" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/8b5cf6/ffffff?text=Finance+App'">
-                        <div class="absolute inset-0 bg-indigo-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
-                            <button @click="modalOpen = true; modalProject = { title: 'Fintech Mobile Banking App', category: 'Mobile App', desc: 'Aplikasi dompet digital dan manajemen keuangan pribadi dengan fitur transfer instan, analisis pengeluaran bulanan, dan investasi.', tech: ['Flutter', 'Node.js', 'MongoDB'], image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80' }" class="bg-white text-slate-900 p-3 rounded-xl font-semibold shadow-lg hover:scale-110 transition">
-                                <i class="fa-solid fa-eye"></i> Detail
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6 space-y-3">
-                        <span class="text-xs font-semibold bg-violet-50 dark:bg-violet-950 text-violet-600 dark:text-violet-400 px-2.5 py-1 rounded-full">2D Drawing CAD</span>
-                        <h4 class="text-xl font-bold">Fintech Mobile Banking App</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Aplikasi dompet digital dan manajemen keuangan dengan fitur transfer dan analisis anggaran.</p>
-                        <div class="flex flex-wrap gap-1.5 pt-2">
-                            <span class="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">Flutter</span>
-                            <span class="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">Node.js</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Proyek 3 -->
-                <div x-show="activeFilter === 'all' || activeFilter === 'uiux'" class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition flex flex-col justify-between group">
-                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Travel UI/UX" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/ec4899/ffffff?text=Travel+UIUX'">
-                        <div class="absolute inset-0 bg-indigo-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
-                            <button @click="modalOpen = true; modalProject = { title: 'Travel Planner Redesign (UI/UX)', category: 'UI/UX Design', desc: 'Desain ulang platform pemesanan tiket wisata dan hotel dengan fokus pada kemudahan navigasi pencarian dan estetika visual.', tech: ['Figma', 'Design System', 'User Research'], image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80' }" class="bg-white text-slate-900 p-3 rounded-xl font-semibold shadow-lg hover:scale-110 transition">
-                                <i class="fa-solid fa-eye"></i> Detail
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6 space-y-3">
-                        <span class="text-xs font-semibold bg-fuchsia-50 dark:bg-fuchsia-950 text-fuchsia-600 dark:text-fuchsia-400 px-2.5 py-1 rounded-full">Clashing</span>
-                        <h4 class="text-xl font-bold">Travel Planner Redesign</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Desain ulang platform pemesanan tiket wisata dan hotel dengan fokus pada navigasi intuitif.</p>
-                        <div class="flex flex-wrap gap-1.5 pt-2">
-                            <span class="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">Figma</span>
-                            <span class="text-xs bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-300">UI/UX</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- MODAL / LIGHTBOX PREVIEW PROYEK -->
-        <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm" @keydown.escape.window="modalOpen = false">
-            <div @click.outside="modalOpen = false" class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 transform transition-all">
-                <div class="relative aspect-video bg-slate-100 dark:bg-slate-800">
-                    <img :src="modalProject.image" :alt="modalProject.title" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/4f46e5/ffffff?text=Preview'">
-                    <button @click="modalOpen = false" class="absolute top-4 right-4 bg-slate-900/60 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-900 transition">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="p-6 sm:p-8 space-y-4">
-                    <span class="text-xs font-semibold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full" x-text="modalProject.category"></span>
-                    <h3 class="text-2xl font-bold" x-text="modalProject.title"></h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" x-text="modalProject.desc"></p>
-                    <div class="pt-2">
-                        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Teknologi Digunakan:</h4>
-                        <div class="flex flex-wrap gap-2">
-                            <template x-for="t in modalProject.tech">
-                                <span class="text-xs font-medium bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-lg text-slate-700 dark:text-slate-300" x-text="t"></span>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                        <button @click="modalOpen = false" class="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">Tutup</button>
-                        <a href="#contact" @click="modalOpen = false" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 shadow-lg shadow-indigo-500/25 transition">Diskusikan Proyek Serupa</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONI KLIEN -->
-    <section id="testimonials" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Kata Klien</h2>
-                <h3 class="text-3xl font-bold tracking-tight">Testimoni & Rekomendasi</h3>
-                <p class="text-slate-600 dark:text-slate-400">Apa kata mereka yang pernah bekerja sama dengan saya.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimoni 1 -->
-                <div class="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between space-y-6">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-400 text-sm gap-1">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic">
-                            "Alex sangat profesional dan cepat tanggap. Website perusahaan kami selesai tepat waktu dengan hasil yang jauh melampaui ekspektasi. Sangat direkomendasikan!"
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <div class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center font-bold text-indigo-600 dark:text-indigo-400">
-                            RD
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-sm">Rian Darmawan</h5>
-                            <p class="text-xs text-slate-500">CEO, Startup Teknologi lokal</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimoni 2 -->
-                <div class="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between space-y-6">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-400 text-sm gap-1">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic">
-                            "Desain UI/UX yang dibuat Alex sangat rapi dan ramah pengguna. Pengguna aplikasi kami meningkat drastis sejak pembaruan antarmuka ini."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <div class="w-12 h-12 rounded-full bg-violet-100 dark:bg-violet-950 flex items-center justify-center font-bold text-violet-600 dark:text-violet-400">
-                            SA
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-sm">Siti Aisyah</h5>
-                            <p class="text-xs text-slate-500">Product Manager</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimoni 3 -->
-                <div class="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-700/50 flex flex-col justify-between space-y-6">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-400 text-sm gap-1">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 italic">
-                            "Komunikasi yang sangat baik dan hasil kodenya bersih serta mudah dirawat. Pastinya akan menggunakan jasa Alex lagi untuk proyek berikutnya."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <div class="w-12 h-12 rounded-full bg-fuchsia-100 dark:bg-fuchsia-950 flex items-center justify-center font-bold text-fuchsia-600 dark:text-fuchsia-400">
-                            BP
-                        </div>
-                        <div>
-                            <h5 class="font-bold text-sm">Budi Prasetyo</h5>
-                            <p class="text-xs text-slate-500">Founder E-Commerce</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- KONTAK SECTION -->
-    <section id="contact" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ submitted: false }">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Info Kontak & Social Links -->
-                <div class="space-y-6">
-                    <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Mari Terhubung</h2>
-                    <h3 class="text-3xl font-bold tracking-tight">Contact Here!</h3>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                        .
-                    </p>
-
-                    <div class="space-y-4 pt-2">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-500 font-medium">Email</div>
-                                <div class="font-bold text-sm">regaarmanmulyana@gmail.com</div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-violet-50 dark:bg-violet-950 text-violet-600 dark:text-violet-400 flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-500 font-medium">Telepon / WhatsApp</div>
-                                <div class="font-bold text-sm">+62 851-3510-7473</div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-fuchsia-50 dark:bg-fuchsia-950 text-fuchsia-600 dark:text-fuchsia-400 flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-500 font-medium">Lokasi</div>
-                                <div class="font-bold text-sm">Bandung, Jawa Barat, Indonesia</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sosial Media -->
-                    <div class="flex gap-3 pt-4">
-                        <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://twitter.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
-                    </div>
-                </div>
-
-                <!-- Form Kontak Interaktif -->
-                <div class="bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl relative">
-                    <!-- Pesan Sukses Terkirim -->
-                    <div x-show="submitted" x-cloak class="absolute inset-0 bg-white dark:bg-slate-900 z-10 flex flex-col items-center justify-center text-center p-8 rounded-3xl space-y-4">
-                        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center text-2xl">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <h4 class="text-2xl font-bold">Pesan Terkirim!</h4>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Terima kasih telah menghubungi saya. Saya akan merespons pesan Anda dalam waktu maksimal 1x24 jam.</p>
-                        <button @click="submitted = false" class="mt-4 bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition">Kirim Pesan Lain</button>
-                    </div>
-
-                    <form @submit.prevent="submitted = true" class="space-y-5">
-                        <h4 class="text-xl font-bold mb-2">Kirim Pesan</h4>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Nama Lengkap</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 text-sm" placeholder="Cth: Budi Santoso">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Alamat Email</label>
-                            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 text-sm" placeholder="email@domain.com">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Pesan / Proyek</label>
-                            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 text-sm" placeholder="Ceritakan detail proyek atau kebutuhan Anda..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-indigo-500/25 hover:opacity-95 transition">
-                            Kirim Pesan Sekarang <i class="fa-solid fa-paper-plane ml-2"></i>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>&copy; 2026 Rega Arman Mulyana. Hak cipta dilindungi undang-undang.</div>
-            <div class="flex gap-4">
-                <a href="#about" class="hover:text-indigo-600 transition">Tentang</a>
-                <a href="#portfolio" class="hover:text-indigo-600 transition">Portofolio</a>
-                <a href="#contact" class="hover:text-indigo-600 transition">Kontak</a>
-            </div>
-        </div>
+    <!-- FOOTER SIMPLE -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-sm text-slate-500">
+        <p>&copy; 2024 Rega Arman Mulyana. All rights reserved.</p>
     </footer>
 
 </body>
