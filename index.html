@@ -1,11 +1,23 @@
+```html
 <!DOCTYPE html>
-<html lang="id" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', activeFilter: 'all', mobileMenu: false, modalOpen: false, modalProject: {} }" :class="{ 'dark': darkMode }" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio & CV Profesional - BIM Modeler</title>
-    <!-- Tailwind CSS -->
+    <title>Rega Arman Mulyana | Architectural Journal & BIM Workspace</title>
+    
+    <!-- Google Fonts: Playfair Display, Inter, & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -13,247 +25,1420 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        [x-cloak] { display: none !important; }
+        /* Custom Smooth Transitions & Scrollbars */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Editorial Border Grid utilities */
+        .border-editorial {
+            border-color: #E2E0DC;
+        }
+        .dark .border-editorial {
+            border-color: #27272A;
+        }
+
+        /* Line Clamp for Card Summaries */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F9F8F6;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0C0A09;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+        }
     </style>
+
+    <!-- Theme Switcher Prevention of FOUC -->
+    <script>
+        if (localStorage.getItem('theme') === 'night' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col justify-between">
+<body class="bg-[#F9F8F6] text-[#1C1917] dark:bg-[#0C0A09] dark:text-[#E7E5E4] font-sans antialiased selection:bg-sky-600 selection:text-white">
 
-    <!-- NAVBAR -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-500 bg-clip-text text-transparent">
-                MyPorto.
-            </a>
+    <!-- TOAST NOTIFICATION BANNER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300">
+        <div class="flex items-center gap-3 px-5 py-3 rounded border shadow-2xl bg-stone-900 border-sky-500 text-white dark:bg-zinc-900">
+            <i class="fa-solid fa-wand-magic-sparkles text-sky-400"></i>
+            <span id="toast-message" class="text-xs font-mono font-medium">Notification</span>
+        </div>
+    </div>
 
-            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm">
-                <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Tentang</a>
-                <a href="#services" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Layanan</a>
-                <a href="#resume" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">CV & Pengalaman</a>
-                <a href="#portfolio" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Portofolio</a>
-                <a href="#methodology" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Pendekatan BIM</a>
-                <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Kontak</a>
+    <!-- 1. MASTHEAD & HEADER -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[#F9F8F6]/90 dark:bg-[#0C0A09]/90 border-b border-editorial">
+        <!-- Top Edition Info Strip -->
+        <div class="border-b border-editorial text-[10px] font-mono uppercase tracking-widest py-1.5 px-6 flex justify-between items-center text-stone-500 dark:text-zinc-400">
+            <div>VOL. 2026 // ED. 01 • ARCHITECTURAL JOURNAL</div>
+            <div id="current-date" class="hidden sm:block font-semibold text-sky-700 dark:text-sky-400">RABU, 22 OKTOBER 2026</div>
+            <div>LOCATION: BANDUNG / JAKARTA</div>
+        </div>
+
+        <!-- Main Branding Header -->
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <a href="#" class="font-serif text-2xl md:text-3xl font-extrabold tracking-tight uppercase block leading-none">
+                    REGA ARMAN MULYANA<span class="text-sky-600">.</span>
+                </a>
+                <span class="text-[11px] font-mono uppercase tracking-wider block mt-1 text-stone-500 dark:text-zinc-400">
+                    BIM Modeler & Architectural Drafter
+                </span>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-7 text-xs uppercase tracking-widest font-mono font-medium">
+                <a href="#about" class="hover:text-sky-600 transition-colors">About</a>
+                <a href="#timeline" class="hover:text-sky-600 transition-colors">Career</a>
+                <a href="#projects" class="hover:text-sky-600 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-sky-600 transition-colors">Skills</a>
+                <a href="#certificates" class="hover:text-sky-600 transition-colors">Certificates</a>
+                <a href="#cv" class="hover:text-sky-600 transition-colors">CV</a>
+                <a href="#contact" class="hover:text-sky-600 transition-colors">Contact</a>
             </nav>
 
-            <div class="flex items-center space-x-4">
-                <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
-                        class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:scale-105 transition shadow-sm"
-                        aria-label="Toggle Dark Mode">
-                    <i class="fa-solid fa-moon dark:hidden"></i>
-                    <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
+            <!-- Theme Switcher & Mobile Menu Button -->
+            <div class="flex items-center gap-3">
+                <button
+                    onclick="toggleTheme()"
+                    class="flex items-center gap-2 px-3 py-1.5 text-xs font-mono uppercase tracking-wider border border-editorial hover:border-sky-600 transition-all"
+                    title="Switch Theme"
+                >
+                    <i id="theme-icon" class="fa-solid fa-moon text-sky-700"></i>
+                    <span id="theme-label" class="hidden sm:inline">Night Ink</span>
                 </button>
 
-                <a href="#resume" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/25 hover:opacity-95 transition">
-                    <i class="fa-solid fa-download"></i> CV Saya
-                </a>
-
-                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
-                    <i class="fa-solid fa-bars text-xl" x-show="!mobileMenu"></i>
-                    <i class="fa-solid fa-xmark text-xl" x-show="mobileMenu" x-cloak></i>
+                <button
+                    onclick="toggleMobileMenu()"
+                    class="lg:hidden p-2 border border-editorial text-stone-800 dark:text-zinc-200"
+                >
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Menu Mobile -->
-        <div class="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-3" x-show="mobileMenu" x-cloak x-transition>
-            <a href="#about" @click="mobileMenu = false" class="block py-2 font-medium">Tentang</a>
-            <a href="#services" @click="mobileMenu = false" class="block py-2 font-medium">Layanan</a>
-            <a href="#resume" @click="mobileMenu = false" class="block py-2 font-medium">CV & Pengalaman</a>
-            <a href="#portfolio" @click="mobileMenu = false" class="block py-2 font-medium">Portofolio</a>
-            <a href="#methodology" @click="mobileMenu = false" class="block py-2 font-medium">Pendekatan BIM</a>
-            <a href="#contact" @click="mobileMenu = false" class="block py-2 font-medium">Kontak</a>
-            <a href="#resume" @click="mobileMenu = false" class="w-full text-center block bg-indigo-600 text-white py-2.5 rounded-xl font-semibold shadow">Download CV</a>
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-editorial px-6 py-6 space-y-4 text-xs uppercase tracking-widest font-mono bg-[#F3F1ED] dark:bg-[#18181B]">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">About</a>
+            <a href="#timeline" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">Career Timeline</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">Selected Projects</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">Skills & Software</a>
+            <a href="#certificates" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">Certificates</a>
+            <a href="#cv" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">Curriculum Vitae</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-1 hover:text-sky-600">Contact</a>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative overflow-hidden py-20 lg:py-32">
-        <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100 via-transparent to-transparent dark:from-indigo-950/30 dark:to-transparent"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div class="flex-1 text-center lg:text-left space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
-                    <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span> Available For Career Discussions 
-                </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-                    Halo, Saya <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Rega Arman Mulyana</span> 👋
-                </h1>
-                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                    Seorang <strong class="text-slate-800 dark:text-slate-200">BIM Modeler</strong> bermotivasi tinggi dengan rekam jejak pada integrasi pemodelan Arsitektur, Struktur, dan MEP.
-                </p>
-                <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
-                    <a href="#portfolio" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-indigo-500/30 transition flex items-center gap-2">
-                        Lihat Portofolio <i class="fa-solid fa-arrow-right text-sm"></i>
-                    </a>
-                    <a href="#contact" class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 font-semibold px-6 py-3.5 rounded-xl transition">
-                        Hubungi Saya
-                    </a>
-                </div>
-                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-slate-800 text-center lg:text-left">
-                    <div>
-                        <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">1.5+</div>
-                        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Tahun Pengalaman</div>
+    <!-- 2. HERO SECTION -->
+    <section class="border-b border-editorial py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Main Headline & Role -->
+                <div class="lg:col-span-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase tracking-widest border border-sky-600/40 text-sky-600 mb-6 bg-sky-50/50 dark:bg-sky-950/30">
+                        <i class="fa-solid fa-cube text-xs"></i>
+                        <span>Architectural Editorial & BIM Portfolio</span>
                     </div>
-                    <div>
-                        <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">10+</div>
-                        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Proyek Selesai</div>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">200-350</div>
-                        <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">LOD</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="relative flex justify-center">
-                <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden bg-gradient-to-tr from-indigo-500 to-violet-500 p-1.5 shadow-2xl shadow-indigo-500/20">
-                    <img src="file_000000003f8882078fb5f022965e29af.png" alt="Rega Arman Mulyana" class="w-full h-full object-cover rounded-[22px]">
+                    <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-medium tracking-tight leading-[1.08] mb-8">
+                        PRECISION BUILDING INFORMATION MODELING & DIGITAL CONSTRUCTION
+                    </h1>
+
+                    <p class="text-lg md:text-xl font-serif italic max-w-3xl leading-relaxed mb-10 text-stone-600 dark:text-zinc-400">
+                        "Menerjemahkan visi arsitektural menjadi model BIM 3D yang akurat, koordinasi bebas bentrokan (clash-free), dan dokumen gambar kerja konstruksi presisi tinggi."
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a
+                            href="#projects"
+                            class="px-8 py-4 text-xs uppercase tracking-widest font-mono font-bold bg-[#1C1917] text-white dark:bg-[#E7E5E4] dark:text-[#1C1917] hover:bg-sky-700 dark:hover:bg-sky-400 transition-colors flex items-center gap-2"
+                        >
+                            <span>Lihat Portofolio</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+
+                        <button
+                            onclick="downloadCV()"
+                            class="px-8 py-4 text-xs uppercase tracking-widest font-mono font-bold border border-[#1C1917] dark:border-[#E7E5E4] hover:border-sky-600 hover:text-sky-600 transition-colors flex items-center gap-2"
+                        >
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            <span>Download CV (PDF)</span>
+                        </button>
+
+                        <a
+                            href="#contact"
+                            class="px-8 py-4 text-xs uppercase tracking-widest font-mono font-bold border border-editorial hover:border-sky-600 transition-colors flex items-center gap-2"
+                        >
+                            <span>Hubungi Saya</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="absolute -bottom-4 -left-4 sm:left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl flex items-center gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 14a2 2 0 0 1 2-2h4a6 6 0 0 0 6-6V2"></path>
-                            <path d="M2 14h6"></path>
-                            <path d="M13 2h6"></path>
-                        </svg>
+
+                <!-- Editorial Sidebar Profile Card -->
+                <div class="lg:col-span-4 border-l-0 lg:border-l border-editorial pl-0 lg:pl-10 pt-8 lg:pt-0">
+                    <div class="space-y-6">
+                        <div class="border border-editorial p-3 bg-[#F3F1ED] dark:bg-[#18181B] relative">
+                            <div class="aspect-[4/5] bg-stone-300 dark:bg-zinc-800 overflow-hidden relative">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop" 
+                                    alt="Rega Arman Mulyana"
+                                    class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                                    onerror="this.src='https://placehold.co/600x800/1c1917/ffffff?text=REGA+ARMAN+MULYANA'"
+                                />
+                                <div class="absolute bottom-0 inset-x-0 p-3 bg-stone-900/90 text-white text-xs font-mono flex justify-between items-center backdrop-blur-sm">
+                                    <span>REGA ARMAN M.</span>
+                                    <span class="text-sky-400 font-bold">BIM MODELER</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Specs -->
+                        <div class="p-4 border border-editorial text-xs font-mono space-y-2.5 bg-[#F3F1ED] dark:bg-[#18181B]">
+                            <div class="flex justify-between border-b pb-1 border-stone-300 dark:border-zinc-700">
+                                <span class="text-stone-500 dark:text-zinc-400">Primary Software:</span>
+                                <span class="font-bold">Autodesk Revit</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-1 border-stone-300 dark:border-zinc-700">
+                                <span class="text-stone-500 dark:text-zinc-400">Coordination:</span>
+                                <span class="font-bold">Navisworks Manage</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-stone-500 dark:text-zinc-400">BIM Standard:</span>
+                                <span class="font-bold text-sky-600">LOD 100 - 500</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-xs font-semibold text-slate-500">Spesialisasi</div>
-                        <div class="text-sm font-bold text-slate-800 dark:text-slate-100">BIM Modeler MEP</div>
-                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. DASHBOARD ANALYTICS -->
+    <section class="border-b border-editorial py-12 bg-[#F3F1ED]/50 dark:bg-[#18181B]/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-6 border border-editorial bg-[#F9F8F6] dark:bg-[#0C0A09]">
+                    <div class="text-xs font-mono uppercase text-sky-600 tracking-widest mb-1">EXPERIENCE</div>
+                    <div class="font-serif text-3xl md:text-4xl font-extrabold">05+ TAHUN</div>
+                    <div class="text-[11px] font-mono text-stone-500 dark:text-zinc-400 mt-1">Drafter & BIM Modeler</div>
+                </div>
+
+                <div class="p-6 border border-editorial bg-[#F9F8F6] dark:bg-[#0C0A09]">
+                    <div class="text-xs font-mono uppercase text-sky-600 tracking-widest mb-1">PROJECTS</div>
+                    <div class="font-serif text-3xl md:text-4xl font-extrabold">20+ SELESAI</div>
+                    <div class="text-[11px] font-mono text-stone-500 dark:text-zinc-400 mt-1">High-Rise, Hospital, Villa</div>
+                </div>
+
+                <div class="p-6 border border-editorial bg-[#F9F8F6] dark:bg-[#0C0A09]">
+                    <div class="text-xs font-mono uppercase text-sky-600 tracking-widest mb-1">ACCURACY</div>
+                    <div class="font-serif text-3xl md:text-4xl font-extrabold">99% CLASH</div>
+                    <div class="text-[11px] font-mono text-stone-500 dark:text-zinc-400 mt-1">Resolution Rate</div>
+                </div>
+
+                <div class="p-6 border border-editorial bg-[#F9F8F6] dark:bg-[#0C0A09]">
+                    <div class="text-xs font-mono uppercase text-sky-600 tracking-widest mb-1">SOFTWARE</div>
+                    <div class="font-serif text-3xl md:text-4xl font-extrabold">08+ MASTERED</div>
+                    <div class="text-[11px] font-mono text-stone-500 dark:text-zinc-400 mt-1">Autodesk & Rendering</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TENTANG SAYA -->
-    <section id="about" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Kenali Lebih Dekat</h2>
-                <h3 class="text-3xl font-bold tracking-tight">Tentang Saya</h3>
-                <p class="text-slate-600 dark:text-slate-400">Berfokus pada akurasi pemodelan, koordinasi antar-disiplin, dan implementasi teknologi BIM untuk efisiensi proyek konstruksi.</p>
+    <!-- 4. ABOUT ME SECTION -->
+    <section id="about" class="border-b border-editorial py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 01</span>
+                <span>//</span>
+                <span>BIOGRAPHY & PHILOSOPHY</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <h4 class="text-2xl font-bold">Merancang Presisi Konstruksi Melalui Pemodelan Digital</h4>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                        Halo! Saya Rega Arman Mulyana, seorang BIM Modeler dengan pengalaman lebih dari 1,5 tahun di industri konstruksi. Saya memiliki rekam jejak yang solid dalam mengintegrasikan pemodelan Arsitektur, Struktur, dan secara khusus berfokus pada sistem Mechanical, Electrical, & Plumbing (MEP).
+            <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-12 uppercase">
+                ABOUT REGA ARMAN MULYANA
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Biography Text -->
+                <div class="lg:col-span-7 space-y-6 text-base leading-relaxed font-serif">
+                    <p class="text-xl font-medium leading-relaxed">
+                        "Building Information Modeling (BIM) bukan sekadar software 3D, melainkan metode komunikasi data konstruksi yang menghubungkan imajinasi arsitek dengan kepastian eksekusi di lapangan."
                     </p>
-                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                        Saya terbiasa merancang dan mengelola model 3D dengan tingkat detail (LOD) 200 hingga 350. Tujuan utama saya dalam setiap proyek adalah menerjemahkan desain menjadi model digital yang sangat akurat, memastikan kelancaran koordinasi antar-disiplin, dan mencegah clash (benturan) sebelum tahap pelaksanaan di lapangan.
+                    <p class="text-stone-600 dark:text-zinc-400">
+                        Saya adalah seorang <strong>BIM Modeler & Architectural Drafter</strong> profesional yang berfokus pada integrasi data digital dan presisi pemodelan bangunan. Berpengalaman dalam mengelola model BIM multidisiplin dari tahap desain skematik hingga gambar kerja konstruksi (Shop Drawing & As-Built Drawing).
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-sm">
-                        <div><strong class="text-slate-800 dark:text-slate-200">Nama:</strong> Rega Arman Mulyana</div>
-                        <div><strong class="text-slate-800 dark:text-slate-200">Email:</strong> regaarmanmulyana@gmail.com</div>
-                        <div><strong class="text-slate-800 dark:text-slate-200">Lokasi:</strong> Bandung, Indonesia</div>
-                        <div><strong class="text-slate-800 dark:text-slate-200">Status:</strong> Available for Career Discussions</div>
+                    <p class="text-stone-600 dark:text-zinc-400">
+                        Dengan keahlian mendalam pada ekosistem Autodesk (Revit, Navisworks, AutoCAD), saya berdedikasi untuk meminimalisir kesalahan lapangan melalui Clash Detection yang akurat, otomatisasi dokumentasi, serta penerapan standar LOD 100 hingga LOD 500 secara konsisten.
+                    </p>
+                </div>
+
+                <!-- Core Principles Grid -->
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="text-xs font-mono uppercase tracking-widest text-sky-600 mb-4 border-b pb-2 border-editorial">CORE WORKING PRINCIPLES</h3>
+
+                    <div class="p-4 border border-editorial bg-[#F3F1ED] dark:bg-[#18181B] space-y-2">
+                        <div class="flex items-center gap-3 font-mono text-xs font-bold uppercase">
+                            <i class="fa-solid fa-ruler-combined text-sky-600 text-sm"></i>
+                            <span>Presisi Tinggi & Toleransi Nol</span>
+                        </div>
+                        <p class="text-xs font-serif text-stone-600 dark:text-zinc-400">
+                            Menjamin toleransi dimensi yang sangat minim antara model virtual dan realisasi fisik bangunan.
+                        </p>
+                    </div>
+
+                    <div class="p-4 border border-editorial bg-[#F3F1ED] dark:bg-[#18181B] space-y-2">
+                        <div class="flex items-center gap-3 font-mono text-xs font-bold uppercase">
+                            <i class="fa-solid fa-compass-drafting text-sky-600 text-sm"></i>
+                            <span>Koordinasi Multidisiplin</span>
+                        </div>
+                        <p class="text-xs font-serif text-stone-600 dark:text-zinc-400">
+                            Penyelesaian bentrokan (Clash Detection) pra-konstruksi antar disiplin Arsitektur, Struktur, dan MEP.
+                        </p>
+                    </div>
+
+                    <div class="p-4 border border-editorial bg-[#F3F1ED] dark:bg-[#18181B] space-y-2">
+                        <div class="flex items-center gap-3 font-mono text-xs font-bold uppercase">
+                            <i class="fa-solid fa-certificate text-sky-600 text-sm"></i>
+                            <span>Kepatuhan Standar ISO 19650</span>
+                        </div>
+                        <p class="text-xs font-serif text-stone-600 dark:text-zinc-400">
+                            Penerapan ketat kualifikasi LOD 100-500 dan aturan Naming Convention standar industri.
+                        </p>
                     </div>
                 </div>
 
-                <!-- Keahlian Utama (Daftar Software) -->
-                <div class="bg-slate-50 dark:bg-slate-800/50 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700/50 space-y-6">
-                    <h4 class="font-bold text-lg mb-4">Perangkat Lunak Utama</h4>
-                    
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. CAREER TIMELINE -->
+    <section id="timeline" class="border-b border-editorial py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 02</span>
+                <span>//</span>
+                <span>CAREER KRONOLOGI</span>
+            </div>
+
+            <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-12 uppercase">
+                PENGALAMAN KERJA & REKAM JEJAK
+            </h2>
+
+            <div class="space-y-8" id="timeline-container">
+                <!-- Content generated via JavaScript for clarity & easy updates -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. PORTFOLIO 10 PROJECTS WITH FILTER & CASE STUDY MODAL -->
+    <section id="projects" class="border-b border-editorial py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 03</span>
+                <span>//</span>
+                <span>SELECTED WORKS (10 PROJECTS)</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight uppercase">
+                        PORTOFOLIO PROYEK
+                    </h2>
+                    <p class="text-xs font-mono text-stone-500 dark:text-zinc-400 mt-2">
+                        Koleksi studi kasus pemodelan BIM 3D, ekstraksi 2D, MEP, dan struktur.
+                    </p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-2" id="filter-buttons">
+                    <button onclick="filterProjects('Semua')" class="filter-btn active px-4 py-2 text-xs font-mono uppercase tracking-widest border border-stone-900 bg-stone-900 text-white dark:border-stone-100 dark:bg-stone-100 dark:text-stone-900 font-bold transition-all">Semua</button>
+                    <button onclick="filterProjects('2D')" class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-widest border border-editorial text-stone-600 dark:text-zinc-400 hover:border-sky-600 transition-all">2D</button>
+                    <button onclick="filterProjects('3D BIM')" class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-widest border border-editorial text-stone-600 dark:text-zinc-400 hover:border-sky-600 transition-all">3D BIM</button>
+                    <button onclick="filterProjects('MEP')" class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-widest border border-editorial text-stone-600 dark:text-zinc-400 hover:border-sky-600 transition-all">MEP</button>
+                    <button onclick="filterProjects('Arsitektur')" class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-widest border border-editorial text-stone-600 dark:text-zinc-400 hover:border-sky-600 transition-all">Arsitektur</button>
+                    <button onclick="filterProjects('Struktur')" class="filter-btn px-4 py-2 text-xs font-mono uppercase tracking-widest border border-editorial text-stone-600 dark:text-zinc-400 hover:border-sky-600 transition-all">Struktur</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CASE STUDY DETAIL MODAL -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-stone-900/80 backdrop-blur-md overflow-y-auto">
+        <div class="relative w-full max-w-4xl border border-editorial bg-[#F9F8F6] dark:bg-[#0C0A09] p-6 md:p-10 my-8 shadow-2xl space-y-8">
+            
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 border border-editorial hover:bg-stone-200 dark:hover:bg-zinc-800 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div>
+                <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-sky-600 mb-2">
+                    <span>CASE STUDY DETAIL</span>
+                    <span>//</span>
+                    <span id="modal-category">CATEGORY</span>
+                </div>
+                <h2 id="modal-title" class="font-serif text-3xl md:text-5xl font-bold uppercase">PROJECT TITLE</h2>
+                <div class="flex flex-wrap gap-4 text-xs font-mono mt-3 text-stone-500 dark:text-zinc-400">
+                    <span>Lokasi: <strong id="modal-location" class="text-stone-900 dark:text-stone-100">-</strong></span>
+                    <span>Tahun: <strong id="modal-year" class="text-stone-900 dark:text-stone-100">-</strong></span>
+                    <span>Klien: <strong id="modal-client" class="text-stone-900 dark:text-stone-100">-</strong></span>
+                    <span>Role: <strong id="modal-role" class="text-stone-900 dark:text-stone-100">-</strong></span>
+                </div>
+            </div>
+
+            <div class="aspect-[16/9] overflow-hidden border border-editorial bg-stone-900">
+                <img id="modal-image" src="" alt="Project Image" class="w-full h-full object-cover">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                <div class="space-y-4">
+                    <h3 class="font-mono text-xs uppercase tracking-widest text-sky-600 font-bold border-b pb-1 border-editorial">OVERVIEW & SCOPE OF WORK</h3>
+                    <p id="modal-overview" class="font-serif leading-relaxed text-xs md:text-sm text-stone-700 dark:text-zinc-300"></p>
+                    <h4 class="font-mono text-xs font-bold uppercase pt-2">Scope Deliverables:</h4>
+                    <ul id="modal-scope" class="space-y-1 font-serif text-xs list-disc list-inside text-stone-600 dark:text-zinc-400"></ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-mono text-xs uppercase tracking-widest text-sky-600 font-bold border-b pb-1 border-editorial">BIM CHALLENGES & SOLUTION</h3>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold uppercase text-amber-600">Tantangan Teknis:</h4>
+                        <p id="modal-challenges" class="font-serif text-xs leading-relaxed mt-1 text-stone-600 dark:text-zinc-400"></p>
+                    </div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold uppercase text-emerald-600">Solusi BIM & Resolution:</h4>
+                        <p id="modal-solution" class="font-serif text-xs leading-relaxed mt-1 text-stone-600 dark:text-zinc-400"></p>
+                    </div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold uppercase text-sky-600">Kontribusi Saya:</h4>
+                        <p id="modal-contribution" class="font-serif text-xs leading-relaxed mt-1 text-stone-600 dark:text-zinc-400"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t pt-6 border-editorial flex flex-wrap justify-between items-center gap-4">
+                <div className="flex items-center gap-2 font-mono text-xs">
+                    <span class="text-stone-400 text-xs font-mono mr-2">Software Used:</span>
+                    <span id="modal-software-tags" class="flex flex-wrap gap-1"></span>
+                </div>
+
+                <button onclick="closeProjectModal()" class="px-6 py-2 bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-mono uppercase tracking-widest font-bold">
+                    Tutup Case Study
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 7. SKILLS & SOFTWARE METER -->
+    <section id="skills" class="border-b border-editorial py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 04</span>
+                <span>//</span>
+                <span>TECHNICAL CAPABILITIES</span>
+            </div>
+
+            <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-12 uppercase">
+                SOFTWARE & KOMPETENSI
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Software Progress Meters -->
+                <div class="lg:col-span-6 space-y-6">
+                    <h3 class="font-mono text-xs uppercase tracking-widest text-sky-600 border-b pb-2 border-editorial">
+                        SOFTWARE MASTERY & EXPERIENCE
+                    </h3>
+
+                    <div class="space-y-6" id="software-meter-container">
+                        <!-- Dynamic render -->
+                    </div>
+                </div>
+
+                <!-- Professional Competencies -->
+                <div class="lg:col-span-6 space-y-6">
+                    <h3 class="font-mono text-xs uppercase tracking-widest text-sky-600 border-b pb-2 border-editorial">
+                        PROFESSIONAL BIM COMPETENCIES
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="competencies-container">
+                        <!-- Dynamic render -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 8. CERTIFICATES -->
+    <section id="certificates" class="border-b border-editorial py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 05</span>
+                <span>//</span>
+                <span>CREDENTIALS & ACCREDITATION</span>
+            </div>
+
+            <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-12 uppercase">
+                SERTIFIKASI PROFESIONAL
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="certificates-container">
+                <!-- Dynamic render -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CERTIFICATE PREVIEW MODAL -->
+    <div id="cert-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-stone-900/80 backdrop-blur-md">
+        <div class="relative w-full max-w-2xl border border-editorial bg-[#F9F8F6] dark:bg-[#0C0A09] p-6 shadow-2xl space-y-6">
+            <button onclick="closeCertModal()" class="absolute top-4 right-4 p-1 border border-editorial">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="space-y-2">
+                <span class="text-xs font-mono uppercase text-sky-600">CERTIFICATE PREVIEW</span>
+                <h3 id="cert-modal-title" class="font-serif text-2xl font-bold">TITLE</h3>
+                <p id="cert-modal-issuer" class="text-xs font-mono text-stone-500">ISSUER</p>
+            </div>
+
+            <div class="aspect-[4/3] bg-stone-900 border border-editorial overflow-hidden">
+                <img id="cert-modal-image" src="" alt="Certificate Preview" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex justify-end">
+                <button onclick="closeCertModal()" class="px-6 py-2 bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 text-xs font-mono uppercase font-bold">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. CURRICULUM VITAE (CV) PREVIEW -->
+    <section id="cv" class="border-b border-editorial py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 06</span>
+                <span>//</span>
+                <span>OFFICIAL DOCUMENTATION</span>
+            </div>
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight uppercase">
+                        CURRICULUM VITAE
+                    </h2>
+                    <p class="text-xs font-mono text-stone-500 dark:text-zinc-400 mt-2">
+                        Pratinjau dokumen riwayat hidup profesional Rega Arman Mulyana.
+                    </p>
+                </div>
+
+                <button onclick="downloadCV()" class="px-8 py-4 bg-sky-600 text-white text-xs font-mono uppercase tracking-widest font-bold flex items-center gap-2 hover:bg-sky-700 transition-colors">
+                    <i class="fa-solid fa-file-pdf text-sm"></i>
+                    <span>Download Official CV (PDF)</span>
+                </button>
+            </div>
+
+            <!-- CV Paper Simulation -->
+            <div class="border border-stone-800 dark:border-stone-200 p-6 md:p-12 bg-white dark:bg-zinc-900 text-stone-900 dark:text-stone-100 shadow-2xl max-w-4xl mx-auto font-serif space-y-8">
+                
+                <!-- CV Header -->
+                <div class="border-b-2 border-stone-900 dark:border-stone-100 pb-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold uppercase tracking-tight">REGA ARMAN MULYANA</h1>
+                        <p class="text-xs font-mono uppercase tracking-widest text-sky-600 mt-1">BIM Modeler & Architectural Drafter</p>
+                    </div>
+                    <div class="text-right text-xs font-mono space-y-1">
+                        <div>rega.arman@example.com</div>
+                        <div>+62 812-3456-7890</div>
+                        <div>Bandung & Jakarta, Indonesia</div>
+                    </div>
+                </div>
+
+                <!-- Executive Summary -->
+                <div>
+                    <h3 class="font-mono text-xs uppercase tracking-widest font-bold border-b pb-1 mb-2 border-stone-300 dark:border-zinc-700">RINGKASAN EKSEKUTIF</h3>
+                    <p class="text-xs leading-relaxed text-stone-700 dark:text-stone-300">
+                        BIM Modeler & Architectural Drafter berdedikasi dengan pengalaman 5+ tahun memimpin pemodelan 3D LOD 100-500, deteksi bentrokan (Clash Detection), dan ekstraksi dokumen gambar kerja proyek High-Rise, Rumah Sakit, dan Infrastruktur.
+                    </p>
+                </div>
+
+                <!-- CV Experience -->
+                <div>
+                    <h3 class="font-mono text-xs uppercase tracking-widest font-bold border-b pb-1 mb-4 border-stone-300 dark:border-zinc-700">PENGALAMAN KERJA RELEVAN</h3>
                     <div class="space-y-4">
-                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
-                                <i class="fa-solid fa-cube text-lg"></i>
+                        <div class="text-xs space-y-1">
+                            <div class="flex justify-between font-bold">
+                                <span>Senior BIM Modeler — PT. Adhi Karya Utama Tbk</span>
+                                <span class="font-mono">2024 - Sekarang</span>
                             </div>
-                            <div>
-                                <div class="font-semibold text-slate-800 dark:text-slate-200">Autodesk Revit</div>
-                                <div class="text-xs text-slate-500">Pemodelan 3D & Koordinasi BIM</div>
-                            </div>
+                            <p class="text-stone-600 dark:text-stone-400 italic">Memimpin koordinasi BIM multidisiplin untuk proyek Tower 42 Lantai.</p>
                         </div>
-
-                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
-                                <i class="fa-solid fa-network-wired text-lg"></i>
+                        <div class="text-xs space-y-1">
+                            <div class="flex justify-between font-bold">
+                                <span>Architectural & MEP Drafter — Konsultan Teknik Nusantara</span>
+                                <span class="font-mono">2022 - 2024</span>
                             </div>
-                            <div>
-                                <div class="font-semibold text-slate-800 dark:text-slate-200">Navisworks</div>
-                                <div class="text-xs text-slate-500">Clash Detection & Simulasi</div>
-                            </div>
+                            <p class="text-stone-600 dark:text-stone-400 italic">Mengembangkan model 3D LOD 350 fasilitas rumah sakit & kampus.</p>
                         </div>
-
-                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
-                                <i class="fa-solid fa-compass-drafting text-lg"></i>
+                        <div class="text-xs space-y-1">
+                            <div class="flex justify-between font-bold">
+                                <span>Junior Drafter — Studio Arsitek Mandiri</span>
+                                <span class="font-mono">2020 - 2022</span>
                             </div>
-                            <div>
-                                <div class="font-semibold text-slate-800 dark:text-slate-200">AutoCAD</div>
-                                <div class="text-xs text-slate-500">Drafting & Dokumentasi 2D</div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
-                                <i class="fa-solid fa-table-list text-lg"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-800 dark:text-slate-200">Spreadsheets</div>
-                                <div class="text-xs text-slate-500">Manajemen Data & Kuantitas</div>
-                            </div>
+                            <p class="text-stone-600 dark:text-stone-400 italic">Produksi gambar kerja 2D For Construction hunian & komersial.</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Education & Skills -->
+                <div class="grid grid-cols-2 gap-6 text-xs">
+                    <div>
+                        <h3 class="font-mono text-xs uppercase tracking-widest font-bold border-b pb-1 mb-2 border-stone-300 dark:border-zinc-700">PENDIDIKAN</h3>
+                        <div class="font-bold">S1 Teknik Arsitektur / D3 Bangunan</div>
+                        <div class="text-stone-500">Lulus Predikat Pujian</div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-mono text-xs uppercase tracking-widest font-bold border-b pb-1 mb-2 border-stone-300 dark:border-zinc-700">SOFTWARE UTAMA</h3>
+                        <div class="font-mono">Revit, AutoCAD, Navisworks, Enscape, Lumion</div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
     </section>
 
-    <!-- FOKUS & METODOLOGI KERJA -->
-    <section id="methodology" class="py-20 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                <h2 class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Pendekatan Kerja</h2>
-                <h3 class="text-3xl font-bold tracking-tight">Fokus & Metodologi BIM</h3>
-                <p class="text-slate-600 dark:text-slate-400">Bagaimana saya memastikan kualitas dan akurasi dalam setiap model yang dibangun.</p>
+    <!-- 10. CONTACT & FOOTER -->
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-sky-600 mb-4">
+                <span>SECTION 07</span>
+                <span>//</span>
+                <span>CORRESPONDENCE</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
-                    <div class="text-indigo-600 dark:text-indigo-400 text-3xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
-                    <h4 class="text-xl font-bold mb-3">Koordinasi Antar-Disiplin</h4>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Fokus utama pada deteksi benturan (clash detection) sejak fase awal desain untuk mencegah pekerjaan ulang yang mahal di lapangan, memastikan keselarasan antara Arsitektur, Struktur, dan MEP.
+            <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-tight mb-12 uppercase">
+                HUBUNGI SAYA
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Direct Contact Details -->
+                <div class="lg:col-span-5 space-y-8">
+                    <p class="font-serif text-lg leading-relaxed">
+                        Apakah Anda membutuhkan BIM Modeler untuk proyek skala besar atau konsultasi dokumentasi gambar kerja? Mari berdiskusi.
                     </p>
+
+                    <div class="space-y-4 font-mono text-xs">
+                        <div class="p-4 border border-editorial flex items-center gap-4 bg-[#F3F1ED] dark:bg-[#18181B]">
+                            <i class="fa-solid fa-envelope text-sky-600 text-lg"></i>
+                            <div>
+                                <span class="text-stone-400 block text-[10px]">EMAIL DIRECT</span>
+                                <a href="mailto:rega.arman@example.com" class="font-bold hover:underline">rega.arman@example.com</a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-editorial flex items-center gap-4 bg-[#F3F1ED] dark:bg-[#18181B]">
+                            <i class="fa-brands fa-whatsapp text-sky-600 text-lg"></i>
+                            <div>
+                                <span class="text-stone-400 block text-[10px]">WHATSAPP / PHONE</span>
+                                <a href="https://wa.me/6281234567890" target="_blank" class="font-bold hover:underline">+62 812-3456-7890</a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-editorial flex items-center gap-4 bg-[#F3F1ED] dark:bg-[#18181B]">
+                            <i class="fa-solid fa-location-dot text-sky-600 text-lg"></i>
+                            <div>
+                                <span class="text-stone-400 block text-[10px]">LOCATION</span>
+                                <span class="font-bold">Bandung & Jakarta, Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="flex gap-4 pt-2">
+                        <a href="https://linkedin.com" target="_blank" class="p-3 border border-editorial hover:border-sky-600 transition-colors">
+                            <i class="fa-brands fa-linkedin-in text-base"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="p-3 border border-editorial hover:border-sky-600 transition-colors">
+                            <i class="fa-brands fa-instagram text-base"></i>
+                        </a>
+                        <a href="https://github.com" target="_blank" class="p-3 border border-editorial hover:border-sky-600 transition-colors">
+                            <i class="fa-brands fa-github text-base"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
-                    <div class="text-indigo-600 dark:text-indigo-400 text-3xl mb-4"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h4 class="text-xl font-bold mb-3">Akurasi & Detail (LOD)</h4>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Menerapkan Level of Development (LOD) yang tepat, mulai dari LOD 200 hingga 350, memastikan model tidak hanya sebagai visualisasi, tetapi juga sumber informasi yang andal untuk konstruksi.
-                    </p>
+                <!-- Contact Form -->
+                <div class="lg:col-span-7">
+                    <form onsubmit="handleFormSubmit(event)" class="p-8 border border-editorial space-y-6 bg-[#F3F1ED] dark:bg-[#18181B]">
+                        <h3 class="font-mono text-xs uppercase tracking-widest text-sky-600 font-bold border-b pb-2 border-editorial">
+                            FORMULIR PESAN DIRECT
+                        </h3>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-1">
+                                <label class="text-xs font-mono uppercase">Nama Lengkap *</label>
+                                <input type="text" id="form-name" required placeholder="John Doe" class="w-full p-3 text-xs font-mono border border-editorial bg-transparent focus:outline-none focus:border-sky-600" />
+                            </div>
+
+                            <div class="space-y-1">
+                                <label class="text-xs font-mono uppercase">Email Anda *</label>
+                                <input type="email" id="form-email" required placeholder="john@company.com" class="w-full p-3 text-xs font-mono border border-editorial bg-transparent focus:outline-none focus:border-sky-600" />
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-mono uppercase">Subjek Proyek</label>
+                            <input type="text" id="form-subject" placeholder="Diskusi Proyek BIM Tower 30 Lantai" class="w-full p-3 text-xs font-mono border border-editorial bg-transparent focus:outline-none focus:border-sky-600" />
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-xs font-mono uppercase">Pesan Singkat *</label>
+                            <textarea id="form-message" required rows="5" placeholder="Tuliskan detail kebutuhan pemodelan atau koordinasi BIM Anda..." class="w-full p-3 text-xs font-mono border border-editorial bg-transparent focus:outline-none focus:border-sky-600 resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-sky-600 text-white font-mono text-xs uppercase tracking-widest font-bold flex justify-center items-center gap-2 hover:bg-sky-700 transition-colors">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Kirim Pesan Sekarang</span>
+                        </button>
+                    </form>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition">
-                    <div class="text-indigo-600 dark:text-indigo-400 text-3xl mb-4"><i class="fa-solid fa-arrows-to-eye"></i></div>
-                    <h4 class="text-xl font-bold mb-3">Solusi Jangka Panjang</h4>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Bekerja dengan cermat dan tidak terburu-buru. Setiap elemen dimodelkan dengan mempertimbangkan kemudahan perawatan (maintenance) dan operasional bangunan di masa depan.
-                    </p>
-                </div>
             </div>
+
         </div>
     </section>
 
-    <!-- FOOTER SIMPLE -->
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-sm text-slate-500">
-        <p>&copy; 2024 Rega Arman Mulyana. All rights reserved.</p>
+    <!-- FOOTER -->
+    <footer class="border-t border-editorial py-12 text-xs font-mono">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="font-bold font-serif text-sm block">REGA ARMAN MULYANA</span>
+                <span class="text-stone-500 dark:text-zinc-400">Copyright © 2026. All Rights Reserved. Built for Professional BIM Workspace.</span>
+            </div>
+
+            <div class="flex gap-6 text-[10px] uppercase tracking-widest text-stone-500">
+                <a href="#about" class="hover:underline">About</a>
+                <a href="#projects" class="hover:underline">Projects</a>
+                <a href="#cv" class="hover:underline">CV</a>
+                <a href="#" class="hover:underline">Back to Top ↑</a>
+            </div>
+        </div>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT CORE LOGIC                      -->
+    <!-- ========================================== -->
+    <script>
+        // DATA PORTFOLIO (10 PROJECTS)
+        const PROJECTS_DATA = [
+            {
+                id: 1,
+                title: "Nusantara Skylight Tower",
+                category: "3D BIM",
+                tags: ["3D BIM", "Arsitektur", "Struktur"],
+                location: "Jakarta Pusat",
+                year: "2024",
+                client: "Adhi Karya Project",
+                role: "Lead BIM Modeler",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
+                desc: "Pemodelan LOD 400 Gedung Perkantoran 42 Lantai dengan integrasi fasad kinetik dan penulangan beton presisi.",
+                overview: "Proyek perkantoran flagship 42 lantai di kawasan bisnis Jakarta. Tantangan utama terletak pada geometri fasad yang melengkung dan kepadatan jalur MEP pada area podium basement.",
+                scope: [
+                    "Pemodelan Arsitektur & Struktur LOD 400",
+                    "Clash Detection & Resolution antar MEP-Struktur",
+                    "Penerbitan 120+ Lembar Shop Drawing terkoordinasi",
+                    "Visualisasi Render Real-Time Enscape"
+                ],
+                challenges: "Terdapat lebih dari 450 poin bentrokan awal antara ducting HVAC utama dan balok pre-cast lantai 3-10.",
+                solution: "Mengatur ulang jalur vertikal shaft MEP dan mendesain ulang penetrasi balok berdasarkan analisis tim struktur di Revit.",
+                contribution: "Memimpin alur kerja BIM 100% tanpa revisi besar di lapangan pada tahap pekerjaan struktur utama.",
+                software: ["Revit", "Navisworks", "ACC", "Enscape"]
+            },
+            {
+                id: 2,
+                title: "Bandung Hillside Luxury Villa",
+                category: "Arsitektur",
+                tags: ["Arsitektur", "3D BIM", "2D"],
+                location: "Dago, Bandung",
+                year: "2023",
+                client: "Private Client",
+                role: "Architectural Drafter",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
+                desc: "Desain dan dokumentasi konstruksi villa mewah kontemporer dengan kontinuitas material batu alam dan kayu.",
+                overview: "Villa kontemporer 3 lantai yang dibangun pada kontur lereng terjal 25 derajat. Membutuhkan ketelitian tinggi pada potongan tapak.",
+                scope: [
+                    "Pemodelan tapak kontur Toposolid di Revit",
+                    "Detail gambar kerja interior dan fasad kayu",
+                    "Rendering Lumion 3D walk-through"
+                ],
+                challenges: "Integrasi sistem drainase lereng dengan kontur lanskap tanpa merusak estetika desain kontemporer.",
+                solution: "Penggunaan retaining wall modular yang terintegrasi langsung dalam model struktur Revit.",
+                contribution: "Menyediakan dokumen gambar kerja 2D yang disetujui kontraktor tanpa keluhan kaji ulang.",
+                software: ["Revit", "Lumion", "AutoCAD", "SketchUp"]
+            },
+            {
+                id: 3,
+                title: "Central Hospital MEP Coordination",
+                category: "MEP",
+                tags: ["MEP", "3D BIM", "Struktur"],
+                location: "Surakarta",
+                year: "2023",
+                client: "Konsultan Teknik",
+                role: "MEP BIM Coordinator",
+                image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=1200&auto=format&fit=crop",
+                desc: "Koordinasi nol-bentrokan (Zero-Clash) untuk jalur gas medis, HVAC, Chiller, dan pipa pemadam kebakaran gedung RS 7 lantai.",
+                overview: "Gedung rumah sakit memiliki kepadatan jalur utilitas terpanas dibanding gedung biasa. Lebih dari 12 sistem mekanikal harus muat dalam ceiling height yang terbatas (600mm).",
+                scope: [
+                    "Pemodelan jalur Pipa Gas Medis & Chilled Water",
+                    "Penyusunan kordinat Hanger & Support pipa",
+                    "Clash Matrix & Coordination Meetings"
+                ],
+                challenges: "Keterbatasan plafon medis 600mm menyebabkan tumpang tindih antara saluran udara segar dan tray kabel.",
+                solution: "Menggunakan sistem multi-tier cable tray dan re-routing ducting dengan bagian konversi pipih.",
+                contribution: "Menurunkan potensi RFI (Request for Information) terkait MEP hingga 85%.",
+                software: ["Revit MEP", "Navisworks", "AutoCAD"]
+            },
+            {
+                id: 4,
+                title: "Cikarang Industrial Steel Logistics Warehouse",
+                category: "Struktur",
+                tags: ["Struktur", "3D BIM", "2D"],
+                location: "Cikarang, Jawa Barat",
+                year: "2023",
+                client: "Logistics Corp",
+                role: "Structural BIM Modeler",
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop",
+                desc: "Pemodelan rangka baja WF span 45 meter lengkap dengan sambungan baut, gusset plate, dan pondasi bore pile.",
+                overview: "Gudang logistik seluas 12.000 m2 dengan struktur baja bentang lebar tanpa kolom tengah. Fokus utama pada detail sambungan konstruksi baja.",
+                scope: [
+                    "Pemodelan Detail Struktur Baja LOD 350",
+                    "Detailing Plate, Cleat, Bolt, dan Anchor",
+                    "Ekstraksi Bar Bending Schedule & Steel Weight Schedule"
+                ],
+                challenges: "Akurasi bobot total tonase baja untuk estimasi pengadaan material pabrikasi.",
+                solution: "Penggunaan parameter material kustom pada Revit yang menghitung otomatis berat jenis baja.",
+                contribution: "Akurasi perhitungan tonase baja mencapai selisih di bawah 1.5% terhadap kondisi riil terpasang.",
+                software: ["Revit Structure", "AutoCAD"]
+            },
+            {
+                id: 5,
+                title: "Java Toll Road Bridge Abutment & Pier",
+                category: "Struktur",
+                tags: ["Struktur", "2D"],
+                location: "Jawa Tengah",
+                year: "2022",
+                client: "BUMN Karya",
+                role: "Bridge Structural Drafter",
+                image: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?q=80&w=1200&auto=format&fit=crop",
+                desc: "Dokumentasi gambar kerja 2D penulangan beton (Rebar Detail) untuk abutment jembatan dan girder PCI.",
+                overview: "Pengembangan set gambar Shop Drawing penulangan jembatan tol layang segmen 4. Membutuhkan kerapian gambar potong.",
+                scope: [
+                    "Penyusunan lembar gambar pembesian pilar & abutment",
+                    "Detail potongan melintang & memanjang PCI Girder",
+                    "Tabel daftar bengkokan besi (Bar Bending Schedule)"
+                ],
+                challenges: "Kepadatan susunan tulangan ulir D32 pada zona tumpuan pier head.",
+                solution: "Membuat detail skematik 3D iso-pembesian untuk memudahkan pekerja di lapangan memahami pola jalinan besi.",
+                contribution: "Pengerjaan 40 lembar gambar kerja jembatan selesai 2 minggu lebih cepat.",
+                software: ["AutoCAD", "Revit"]
+            },
+            {
+                id: 6,
+                title: "Heritage Colonial Building 3D Scan-to-BIM",
+                category: "3D BIM",
+                tags: ["3D BIM", "Arsitektur"],
+                location: "Kota Tua, Jakarta",
+                year: "2022",
+                client: "Dinas Kebudayaan",
+                role: "Scan-to-BIM Specialist",
+                image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop",
+                desc: "Rekonstruksi digital gedung cagar budaya peninggalan kolonial dari data Point Cloud hasil Laser Scanning.",
+                overview: "Restorasi gedung bersejarah tanpa dokumen fisik. Mengonversi jutaan titik Point Cloud (RCP) menjadi model Revit parametrik.",
+                scope: [
+                    "Import & Alignment Point Cloud di Revit",
+                    "Pemodelan ornamen fasad klasik & dinding bata",
+                    "Dokumentasi kondisi riil kerusakan struktur (As-Is State)"
+                ],
+                challenges: "Dinding gedung tua yang tidak tegak lurus (miring 3-5 derajat akibat penurunan tanah).",
+                solution: "Menggunakan in-place massing dan slanted wall family kustom pada Revit.",
+                contribution: "Menghasilkan digital twin cagar budaya pertama untuk kawasan Kota Tua.",
+                software: ["Revit", "Recap Pro", "AutoCAD"]
+            },
+            {
+                id: 7,
+                title: "Corporate HQ Interior & MEP Shop Drawing",
+                category: "2D",
+                tags: ["2D", "Arsitektur", "MEP"],
+                location: "SCBD, Jakarta",
+                year: "2022",
+                client: "Tech Firm HQ",
+                role: "Senior Interior Drafter",
+                image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop",
+                desc: "Set gambar detail interior kantor 3 lantai meliputi ceiling plan, custom joinery, dan titik lampu.",
+                overview: "Pekerjaan fit-out kantor seluas 3.500 m2 dengan konsep open-plan dan acoustic baffle ceiling.",
+                scope: [
+                    "Reflected Ceiling Plan (RCP) terkoordinasi",
+                    "Detail Joinery Meja Resepsionis & Partition Glass",
+                    "Skedul Finish Material Floor & Wall"
+                ],
+                challenges: "Penyesuaian pola garis kisi-kisi kayu plafon dengan letak diffuser AC dan lampu LED.",
+                solution: "Pembuatan grid acuan utama 1200x600mm yang diikuti oleh seluruh disiplin.",
+                contribution: "Proses fit-out selesai tepat waktu dalam durasi singkat 60 hari kerja.",
+                software: ["AutoCAD", "SketchUp"]
+            },
+            {
+                id: 8,
+                title: "Metro Shopping Mall Atrium & Escalator",
+                category: "3D BIM",
+                tags: ["3D BIM", "Arsitektur", "MEP"],
+                location: "Surabaya",
+                year: "2021",
+                client: "Retail Property Group",
+                role: "BIM Modeler",
+                image: "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?q=80&w=1200&auto=format&fit=crop",
+                desc: "Pemodelan atrium pusat perbelanjaan, ekskalator silang, dan koordinasi ducting pendingin utama.",
+                overview: "Area void utama atrium mall lantai 1 hingga lantai 5. Memerlukan kepastian clearance ketinggian.",
+                scope: [
+                    "Pemodelan struktur rangka eskalator & void raksasa",
+                    "Routing concealed ducting AC sentral",
+                    "Simulasi pencahayaan buatan malam hari"
+                ],
+                challenges: "Saluran udara besar (1800x800mm) melintasi atas void atrium yang terbuka.",
+                solution: "Membungkus ducting dalam elemen arsitektural soffit lengkung.",
+                contribution: "Memastikan ruang bebas headroom publik memenuhi standar minimum 3.2 meter.",
+                software: ["Revit", "Navisworks", "Enscape"]
+            },
+            {
+                id: 9,
+                title: "University Innovation Hub PBG Permitting Set",
+                category: "2D",
+                tags: ["2D", "Arsitektur"],
+                location: "Jatinangor",
+                year: "2021",
+                client: "Yayasan Pendidikan",
+                role: "Architectural Drafter",
+                image: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop",
+                desc: "Penyusunan dokumen kelengkapan IMB/PBG gedung kampus 5 lantai ramah lingkungan.",
+                overview: "Penyusunan berkas kelayakan teknis bangunan gedung untuk izin mendirikan bangunan.",
+                scope: [
+                    "Gambar denah tata ruang, fasad, dan site plan",
+                    "Perhitungan Koefisien Daerah Hijau (KDH) & Evakuasi",
+                    "Detail fasilitas ramah disabilitas (Ramp & Toilet)"
+                ],
+                challenges: "Ketentuan regulasi daerah terkait rasio luas resapan air hujan yang sangat ketat.",
+                solution: "Merancang biopori dan kolam retensi bawah tanah terintegrasi.",
+                contribution: "Izin Konstruksi (PBG) terbit tanpa syarat perbaikan ulang berkas.",
+                software: ["AutoCAD"]
+            },
+            {
+                id: 10,
+                title: "Urban Commercial Center Masterplan Model",
+                category: "Arsitektur",
+                tags: ["Arsitektur", "3D BIM"],
+                location: "Tangerang Selatan",
+                year: "2021",
+                client: "Developer Land",
+                role: "Junior BIM Modeler",
+                image: "https://images.unsplash.com/photo-1448630360428-65456885c650?q=80&w=1200&auto=format&fit=crop",
+                desc: "Pemodelan massa 3D kawasan komersial terpadu 5 hektar meliputi ruko, jalan, dan lanskap.",
+                overview: "Masterplan konseptual untuk tahap awal pemasaran kawasan ruko dan plaza terbuka.",
+                scope: [
+                    "Massing 3D kawasan dan pembagian kavling",
+                    "Visualisasi aerial panorama 360 derajat",
+                    "Export model ke Lumion untuk video promosi"
+                ],
+                challenges: "Kecepatan merender massa bangunan yang sangat banyak dalam waktu singkat.",
+                solution: "Penggunaan Linked Model di Revit untuk membagi beban memori komputer.",
+                contribution: "Menyediakan aset visual untuk peluncuran brosur penjualan developer.",
+                software: ["Revit", "SketchUp", "Lumion"]
+            }
+        ];
+
+        // TIMELINE DATA
+        const TIMELINE_DATA = [
+            {
+                role: "Senior BIM Modeler",
+                company: "PT. Adhi Karya Utama Tbk",
+                period: "2024 - Sekarang",
+                location: "Jakarta, Indonesia",
+                desc: "Memimpin tim pemodelan BIM untuk proyek High-Rise Commercial Tower 42 lantai. Bertanggung jawab atas koordinasi antar-disiplin dan BEP.",
+                responsibilities: [
+                    "Mengkoordinasikan model Arsitektur, Struktur, dan MEP menggunakan Navisworks Manage.",
+                    "Membuat Parametric Family Revit kustom untuk komponen kompleks gedung.",
+                    "Mengekstraksi Bill of Quantities (BOQ) dan Shop Drawing presisi tinggi.",
+                    "Melakukan deteksi bentrokan (Clash Detection) mingguan dan menerbitkan laporan."
+                ],
+                tools: ["Autodesk Revit", "Navisworks Manage", "BIM 360 / ACC", "AutoCAD"]
+            },
+            {
+                role: "Architectural & MEP Drafter",
+                company: "Konsultan Teknik Nusantara",
+                period: "2022 - 2024",
+                location: "Bandung, Indonesia",
+                desc: "Mengembangkan model 3D LOD 350 untuk fasilitas rumah sakit dan gedung kuliah multi-lantai.",
+                responsibilities: [
+                    "Membuat gambar kerja 2D detail HVAC, Plumbing, dan Sistem Kelistrikan dari model Revit.",
+                    "Membantu Arsitek Utama dalam pemodelan fasad presisi dan pemetaan material Enscape.",
+                    "Verifikasi kesesuaian gambar arsitektur dengan standar SNI dan Kode Bangunan."
+                ],
+                tools: ["Autodesk Revit", "AutoCAD", "Enscape", "SketchUp"]
+            },
+            {
+                role: "Junior Drafter",
+                company: "Studio Arsitek Mandiri",
+                period: "2020 - 2022",
+                location: "Bandung, Indonesia",
+                desc: "Fokus pada produksi set gambar kerja 2D untuk hunian mewah dan bangunan komersial.",
+                responsibilities: [
+                    "Penyusunan gambar For Construction (FC) meliputi denah, potongan, dan detail sambungan.",
+                    "Konversi sketsa konseptual arsitek menjadi file digital AutoCAD dan SketchUp.",
+                    "Pengukuran tapak dan survei lapangan awal proyek."
+                ],
+                tools: ["AutoCAD", "SketchUp", "Lumion", "Photoshop"]
+            },
+            {
+                role: "BIM / CAD Drafter Intern (PKL)",
+                company: "Dinas Pekerjaan Umum & Penataan Ruang",
+                period: "2019 - 2020",
+                location: "Bandung, Indonesia",
+                desc: "Magang kerja lapangan memandu digitalisasi arsip gambar infrastruktur publik.",
+                responsibilities: [
+                    "Digitasi gambar denah gedung pemerintah daerah ke format DWG.",
+                    "Membantu pemodelan 3D massa awal fasilitas umum daerah."
+                ],
+                tools: ["AutoCAD", "SketchUp"]
+            }
+        ];
+
+        // SKILLS DATA
+        const SKILLS_SOFTWARE = [
+            { name: "Autodesk Revit", percent: 95, level: "Expert / Advanced", exp: "5+ yrs", desc: "Arsitektur, Struktur, MEP, Family Creation, Template, & BOQ Schedule." },
+            { name: "AutoCAD", percent: 95, level: "Expert", exp: "6+ yrs", desc: "2D Drafting, Dynamic Blocks, Sheet Set Manager, & Customization." },
+            { name: "Navisworks Manage", percent: 90, level: "Advanced", exp: "4+ yrs", desc: "Clash Detection, 4D Simulation, TimeLiner, & Coordination Reports." },
+            { name: "Enscape 3D", percent: 88, level: "Advanced", exp: "4+ yrs", desc: "Real-time rendering, VR Walkthrough, & Panorama Material Setup." },
+            { name: "Lumion", percent: 85, level: "Proficient", exp: "3+ yrs", desc: "Architectural Video Animation, Landscape & Environmental Effects." },
+            { name: "SketchUp Pro", percent: 90, level: "Advanced", exp: "5+ yrs", desc: "Conceptual Massing, V-Ray Rendering, & LayOut Documentation." }
+        ];
+
+        const SKILLS_COMPETENCIES = [
+            { title: "BIM Modeling (LOD 100 - 500)", desc: "Pemodelan parametrik akurat sesuai tingkat kedetailan dari konseptual hingga As-Built." },
+            { title: "Shop & Detail Drawings", desc: "Ekstraksi lembar kerja konstruksi 2D terkoordinasi lengkap dengan dimensi dan notasi." },
+            { title: "Clash Detection & Resolution", desc: "Matriks analisis bentrokan interdisiplin (Arc/Str/MEP) menggunakan Navisworks." },
+            { title: "Parametric Family Creation", desc: "Pembuatan komponen kustom dengan parameter terikat untuk fleksibilitas material." },
+            { title: "Quantity Take-Off (BOQ)", desc: "Ekstraksi volume material otomatis dari model 3D untuk akurasi rencana RAB." },
+            { title: "ISO 19650 Documentation", desc: "Penyusunan standar sheet, kode legenda, dan kepatuhan terhadap ISO 19650 / BEP." }
+        ];
+
+        // CERTIFICATES DATA
+        const CERTIFICATES_DATA = [
+            {
+                title: "Autodesk Certified Professional: Revit for Architectural Design",
+                issuer: "Autodesk Inc.",
+                year: "2023",
+                credentialId: "ACP-REV-8820491",
+                desc: "Sertifikasi resmi tingkat profesional memvalidasi keahlian mendalam pemodelan arsitektur, kustomisasi keluarga parametrik, dan manajemen dokumentasi proyek besar.",
+                image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=1000&auto=format&fit=crop"
+            },
+            {
+                title: "Navisworks Clash Detection & BIM Specialist",
+                issuer: "BIM Academy Indonesia",
+                year: "2023",
+                credentialId: "BAI-NAV-2023-014",
+                desc: "Kredensial spesialisasi koordinasi mulus antar disiplin, pemetaan matriks konflik, dan penyusunan laporan resolusi bentrokan digital.",
+                image: "https://images.unsplash.com/photo-1589330694653-ded6df03f754?q=80&w=1000&auto=format&fit=crop"
+            },
+            {
+                title: "Certificate of Competency: BIM Level 4",
+                issuer: "BNSP (Badan Nasional Sertifikasi Profesi)",
+                year: "2022",
+                credentialId: "BNSP-BIM-991823",
+                desc: "Pengakuan standar kompetensi nasional Indonesia untuk jenjang kualifikasi jabatan BIM Modeler & Coordinator.",
+                image: "https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=1000&auto=format&fit=crop"
+            }
+        ];
+
+        // DOM RENDERING FUNCTIONS
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDate();
+            renderTimeline();
+            renderProjects('Semua');
+            renderSkills();
+            renderCertificates();
+        });
+
+        // 1. Render Current Date
+        function renderDate() {
+            const dateElem = document.getElementById('current-date');
+            if (dateElem) {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateElem.textContent = now.toLocaleDateString('id-ID', options).toUpperCase();
+            }
+        }
+
+        // 2. Render Timeline
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            if (!container) return;
+
+            container.innerHTML = TIMELINE_DATA.map((item, index) => `
+                <div class="border border-editorial p-6 md:p-8 bg-[#F3F1ED] dark:bg-[#18181B] transition-all hover:border-sky-600">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b pb-4 mb-6 border-stone-300 dark:border-zinc-700 gap-4">
+                        <div>
+                            <span class="text-xs font-mono uppercase text-sky-600 tracking-widest">POSITION 0${index + 1}</span>
+                            <h3 class="font-serif text-2xl font-bold">${item.role}</h3>
+                            <div class="text-xs font-mono font-medium text-stone-600 dark:text-zinc-400 mt-1">
+                                ${item.company} • <span class="italic">${item.location}</span>
+                            </div>
+                        </div>
+                        <div class="self-start md:self-auto">
+                            <span class="inline-block px-4 py-1.5 text-xs font-mono uppercase tracking-widest border border-stone-900 dark:border-zinc-300 font-bold">
+                                ${item.period}
+                            </span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs md:text-sm leading-relaxed mb-6 text-stone-600 dark:text-zinc-400">
+                        ${item.desc}
+                    </p>
+
+                    <div class="mb-6">
+                        <h4 class="text-xs font-mono uppercase tracking-widest text-stone-500 mb-3">Tanggung Jawab Utama:</h4>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs font-serif">
+                            ${item.responsibilities.map(r => `
+                                <li class="flex items-start gap-2">
+                                    <span class="text-sky-600 font-mono font-bold">•</span>
+                                    <span>${r}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-stone-300 dark:border-zinc-800">
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-stone-400 mr-2">Tools:</span>
+                        ${item.tools.map(t => `
+                            <span class="text-[11px] font-mono px-2.5 py-0.5 bg-stone-200 dark:bg-zinc-800 text-stone-700 dark:text-zinc-300">
+                                ${t}
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 3. Render Projects with Filtering
+        function renderProjects(category = 'Semua') {
+            const grid = document.getElementById('projects-grid');
+            if (!grid) return;
+
+            const filtered = category === 'Semua' 
+                ? PROJECTS_DATA 
+                : PROJECTS_DATA.filter(p => p.tags.includes(category));
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="group border border-editorial bg-[#F3F1ED] dark:bg-[#18181B] flex flex-col h-full transition-all duration-300 hover:border-sky-600">
+                    <div class="relative aspect-[16/10] overflow-hidden border-b border-editorial bg-stone-900">
+                        <img 
+                            src="${p.image}" 
+                            alt="${p.title}"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-90 group-hover:opacity-100"
+                            onerror="this.src='https://placehold.co/800x600/1c1917/ffffff?text=${encodeURIComponent(p.title)}'"
+                        />
+                        <div class="absolute top-3 left-3 flex gap-1 flex-wrap">
+                            ${p.tags.map(t => `
+                                <span class="bg-stone-900/90 text-white text-[9px] font-mono uppercase tracking-widest px-2 py-0.5 backdrop-blur-sm border border-stone-700">
+                                    ${t}
+                                </span>
+                            `).join('')}
+                        </div>
+                        <div class="absolute bottom-3 right-3 text-[10px] font-mono text-white bg-stone-900/90 px-2 py-0.5">
+                            ${p.year}
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="text-[10px] font-mono uppercase tracking-widest text-sky-600 mb-1">
+                                ${p.location} • ${p.role}
+                            </div>
+                            <h3 class="font-serif text-xl font-bold leading-snug group-hover:text-sky-600 transition-colors">
+                                ${p.title}
+                            </h3>
+                            <p class="text-xs leading-relaxed mt-2 line-clamp-3 text-stone-600 dark:text-zinc-400">
+                                ${p.desc}
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-editorial flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1">
+                                ${p.software.map(s => `
+                                    <span class="text-[9px] font-mono px-1.5 py-0.5 bg-stone-200 dark:bg-zinc-800 text-stone-700 dark:text-zinc-300">
+                                        ${s}
+                                    </span>
+                                `).join('')}
+                            </div>
+
+                            <button
+                                onclick="openProjectModal(${p.id})"
+                                class="text-xs font-mono uppercase tracking-widest font-bold flex items-center gap-1 text-sky-600 hover:underline"
+                            >
+                                <span>Detail</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter button click handler
+        function filterProjects(category) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => {
+                btn.classList.remove('active', 'bg-stone-900', 'text-white', 'border-stone-900', 'dark:bg-stone-100', 'dark:text-stone-900', 'dark:border-stone-100', 'font-bold');
+                btn.classList.add('border-editorial', 'text-stone-600', 'dark:text-zinc-400');
+            });
+
+            // Highlight clicked button
+            event.target.classList.remove('border-editorial', 'text-stone-600', 'dark:text-zinc-400');
+            event.target.classList.add('active', 'bg-stone-900', 'text-white', 'border-stone-900', 'dark:bg-stone-100', 'dark:text-stone-900', 'dark:border-stone-100', 'font-bold');
+
+            renderProjects(category);
+        }
+
+        // Project Modal Handlers
+        function openProjectModal(id) {
+            const project = PROJECTS_DATA.find(p => p.id === id);
+            if (!project) return;
+
+            document.getElementById('modal-category').textContent = project.category;
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-location').textContent = project.location;
+            document.getElementById('modal-year').textContent = project.year;
+            document.getElementById('modal-client').textContent = project.client;
+            document.getElementById('modal-role').textContent = project.role;
+            document.getElementById('modal-image').src = project.image;
+            document.getElementById('modal-overview').textContent = project.overview;
+            document.getElementById('modal-challenges').textContent = project.challenges;
+            document.getElementById('modal-solution').textContent = project.solution;
+            document.getElementById('modal-contribution').textContent = project.contribution;
+
+            const scopeList = document.getElementById('modal-scope');
+            scopeList.innerHTML = project.scope.map(s => `<li>${s}</li>`).join('');
+
+            const tagsContainer = document.getElementById('modal-software-tags');
+            tagsContainer.innerHTML = project.software.map(s => `
+                <span class="px-2 py-0.5 text-[10px] font-mono bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 font-bold">
+                    ${s}
+                </span>
+            `).join('');
+
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 4. Render Skills & Competencies
+        function renderSkills() {
+            const meterContainer = document.getElementById('software-meter-container');
+            const compContainer = document.getElementById('competencies-container');
+
+            if (meterContainer) {
+                meterContainer.innerHTML = SKILLS_SOFTWARE.map(s => `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end font-mono text-xs">
+                            <div>
+                                <span class="font-bold text-sm block">${s.name}</span>
+                                <span class="text-[10px] text-stone-500 dark:text-zinc-400">${s.exp} • ${s.level}</span>
+                            </div>
+                            <span class="font-bold text-sky-600">${s.percent}%</span>
+                        </div>
+                        <div class="h-2 w-full bg-stone-300 dark:bg-zinc-800 overflow-hidden">
+                            <div class="h-full bg-sky-600 transition-all duration-1000" style="width: ${s.percent}%"></div>
+                        </div>
+                        <p class="text-xs font-serif text-stone-600 dark:text-zinc-400">${s.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            if (compContainer) {
+                compContainer.innerHTML = SKILLS_COMPETENCIES.map(c => `
+                    <div class="p-5 border border-editorial bg-[#F3F1ED] dark:bg-[#18181B] space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-microchip text-sky-600 text-xs"></i>
+                            <h4 class="font-mono text-xs font-bold uppercase">${c.title}</h4>
+                        </div>
+                        <p class="text-xs font-serif leading-relaxed text-stone-600 dark:text-zinc-400">${c.desc}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 5. Render Certificates
+        function renderCertificates() {
+            const container = document.getElementById('certificates-container');
+            if (!container) return;
+
+            container.innerHTML = CERTIFICATES_DATA.map((c, idx) => `
+                <div class="border border-editorial p-6 bg-[#F3F1ED] dark:bg-[#18181B] flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <i class="fa-solid fa-award text-2xl text-sky-600"></i>
+                            <span class="text-xs font-mono font-bold text-stone-400">${c.year}</span>
+                        </div>
+
+                        <h3 class="font-serif text-lg font-bold leading-snug">${c.title}</h3>
+                        
+                        <div class="text-xs font-mono text-sky-600">
+                            Penerbit: ${c.issuer}
+                        </div>
+
+                        <p class="text-xs font-serif leading-relaxed text-stone-600 dark:text-zinc-400">
+                            ${c.desc}
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-editorial flex justify-between items-center">
+                        <span class="text-[10px] font-mono text-stone-400">ID: ${c.credentialId}</span>
+                        <button
+                            onclick="openCertModal(${idx})"
+                            class="text-xs font-mono uppercase font-bold text-sky-600 flex items-center gap-1 hover:underline"
+                        >
+                            <span>Preview</span>
+                            <i class="fa-solid fa-expand text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openCertModal(idx) {
+            const cert = CERTIFICATES_DATA[idx];
+            if (!cert) return;
+
+            document.getElementById('cert-modal-title').textContent = cert.title;
+            document.getElementById('cert-modal-issuer').textContent = `${cert.issuer} • ${cert.year}`;
+            document.getElementById('cert-modal-image').src = cert.image;
+
+            document.getElementById('cert-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertModal() {
+            document.getElementById('cert-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 6. Theme Switching Logic
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'night' : 'warm');
+            updateThemeUI(isDark);
+        }
+
+        function updateThemeUI(isDark) {
+            const icon = document.getElementById('theme-icon');
+            const label = document.getElementById('theme-label');
+            if (isDark) {
+                if (icon) icon.className = "fa-solid fa-sun text-amber-400";
+                if (label) label.textContent = "Warm Paper";
+            } else {
+                if (icon) icon.className = "fa-solid fa-moon text-sky-700";
+                if (label) label.textContent = "Night Ink";
+            }
+        }
+
+        // Initialize icon on load
+        if (document.documentElement.classList.contains('dark')) {
+            updateThemeUI(true);
+        }
+
+        // 7. Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                if (icon) {
+                    icon.className = menu.classList.contains('hidden') ? "fa-solid fa-bars text-lg" : "fa-solid fa-xmark text-lg";
+                }
+            }
+        }
+
+        // 8. Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (toast && toastMsg) {
+                toastMsg.textContent = msg;
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 4000);
+            }
+        }
+
+        function downloadCV() {
+            showToast("Mengunduh CV Rega Arman Mulyana (PDF)...");
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('form-name').value;
+            showToast(`Terima kasih, ${name}! Pesan Anda berhasil terkirim.`);
+            e.target.reset();
+        }
+    </script>
 </body>
 </html>
+```
